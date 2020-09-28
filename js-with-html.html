@@ -83,10 +83,10 @@
 
 
 	//TODO TOGETHER: Write an alert ---> alert("Message goes here.");
-alert("This is an alert!!!");
+// alert("This is an alert!!!");
 
 	//TODO: Write an alert with an alert message
-alert("Here's a second alert message.");
+// alert("Here's a second alert message.");
 
 
 	/*  *******************************
@@ -95,7 +95,11 @@ alert("Here's a second alert message.");
 
 
 	//TODO TOGETHER: Write a confirm interaction and console.log the result
+	var userConfirm = confirm("Would you like to exit?");
 
+	console.log(userConfirm);
+
+	alert("The user selected: " + userConfirm);
 
 	// TODO: Select the OK option. View the result. Select the cancel option. View the result.
 
@@ -105,6 +109,15 @@ alert("Here's a second alert message.");
 	 ******************************/
 	// TODO TOGETHER: Write a prompt interaction. Console.log the result
 
+	var favoriteAnimal = prompt("What is your favorite animal?");
+
+	console.log(favoriteAnimal);
+	console.log(typeof favoriteAnimal);
+
+	var favoriteNumber = Number(prompt("What is your favorite number?"));
+
+	console.log(favoriteNumber);
+	console.log(typeof favoriteNumber);
 
 
 	// TODO: Write an additional prompt. Console.log the result
