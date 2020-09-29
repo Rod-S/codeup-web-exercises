@@ -392,10 +392,23 @@ var weatherType = "";
 
 switch(weatherType) {
     case "Sunny":
-        alert("")
-
+        alert("It is nice and sunny outside today. Wear shorts! Go to the beach, or the park, and get an ice cream.");
+        break;
+    case "Rainy":
+        alert("Rain is falling outside; take a rain coat and a brolly, and don't stay out for too long.");
+        break;
+    case "Snowing":
+        alert("The snow is coming down — it is freezing! Best to stay in with a cup of hot chocolate, or go build a snowman.");
+    case "Overcast":
+        alert("It isn't raining, but the sky is grey and gloomy; it could turn any minute, so take a rain coat just in case.");
+    default:
+        alert("You need to select a weather type!");
 }
 
 
 // 3) https://mdn.github.io/learning-area/javascript/building-blocks/simple-ternary.html
 
+var clickedWhite = true;
+
+var backgroundColor = clickedWhite ? "white" : "black"
+console.log(backgroundColor);
