@@ -81,7 +81,7 @@
      * then display the dollar amount they should tip
      */
     var total = Number(prompt("How much is the bill?"));
-    var percentage = Number(prompt("What percentage tip would you like to leave?"));
+    var percentage = Number(prompt("What percentage tip would you like to leave? (Enter a number from 1-100)"))/100;
     alert("The tip due is $" + calculateTip(total, percentage));
 
     /**
