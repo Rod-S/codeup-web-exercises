@@ -192,17 +192,21 @@ function checkPositiveNegative(userNumberEntered) {
     }
 }
 
-//Did the user enter a number and is it even?
-if ((userNumberEntered && isUserNumberEven) || (userNumberEntered === 0)) {
-    alert("Your number is even.");
-    alert("Your number + 100 is: " + userNumberPlus100);
-    checkPositiveNegative(userNumberEntered);
-//Did the user enter a number and is it odd?
-} else if (userNumberEntered && !isUserNumberEven) {
-    alert("Your number is odd.");
-    alert("Your number + 100 is: " + userNumberPlus100);
-    checkPositiveNegative(userNumberEntered);
-//Did the user not enter a number?
-} else {
-    alert("You didn't enter a number.");
+function alertUserNumInfo() {
+    //Did the user enter a number and is it even?
+    if ((userNumberEntered && isUserNumberEven) || (userNumberEntered === 0)) {
+        alert("Your number is even.");
+        alert("Your number + 100 is: " + userNumberPlus100);
+        checkPositiveNegative(userNumberEntered);
+    //Did the user enter a number and is it odd?
+    } else if (userNumberEntered && !isUserNumberEven) {
+        alert("Your number is odd.");
+        alert("Your number + 100 is: " + userNumberPlus100);
+        checkPositiveNegative(userNumberEntered);
+    //Did the user not enter a number?
+    } else {
+        alert("You didn't enter a number.");
+    }
 }
+
+alertUserNumInfo();
