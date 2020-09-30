@@ -22,11 +22,11 @@
 
 var message;
 function analyzeColor(colorName) {
-    if (colorName == "blue") {
+    if (colorName === "blue") {
         return message = "blue is the color of the sky";
-    } else if (colorName == "red") {
+    } else if (colorName === "red") {
         return message = "Strawberries are red";
-    } else if (colorName == "cyan") {
+    } else if (colorName === "cyan") {
         return message = "I don't know anything about cyan";
     } else {
         return "I don't have any information about that color!"
@@ -78,8 +78,8 @@ switch(randomColor) {
  * function to show it to the user.
  */
 
-// var userChosenColor = prompt("What is your favorite color?");
-// alert(analyzeColor(userChosenColor));
+var userChosenColor = prompt("What is your favorite color?");
+alert(analyzeColor(userChosenColor));
 
 /* ########################################################################## */
 
@@ -204,5 +204,5 @@ if ((userNumberEntered && isUserNumberEven) || (userNumberEntered === 0)) {
     checkPositiveNegative(userNumberEntered);
 //Did the user not enter a number?
 } else {
-    alert("You didn't enter a number.")
+    alert("You didn't enter a number.");
 }
