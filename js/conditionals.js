@@ -204,6 +204,8 @@ function alertUserNumInfo() {
         alert("Your number + 100 is: " + userNumberPlus100);
         checkPositiveNegative(userNumberEntered);
     //Did the user not enter a number?
+    } else if (!userNumberEntered) {
+        return
     } else {
         alert("You didn't enter a number.");
     }
