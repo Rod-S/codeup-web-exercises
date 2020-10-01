@@ -182,29 +182,29 @@ function getUserNumber() {
 function checkPositiveNegative(userNumberEntered) {
     //is number positive?
     if (userNumberEntered > 0) {
-        alert("Your number is positive");
+        return "Your number is positive";
     //is number negative?
     } else if (userNumberEntered < 0) {
-        alert("Your number is negative");
+        return "Your number is negative";
     //is number zero?
     } else {
-        alert("Your number is neither positive nor negative");
+        return "Your number is neither positive nor negative";
     }
 }
 
 function alertUserNumInfo() {
-    //Did the user enter a number and is it even?
+    //Did the user enter a number and is it even or 0?
     if ((userNumberEntered && isUserNumberEven) || (userNumberEntered === 0)) {
         alert("Your number is even.");
         alert("Your number + 100 is: " + userNumberPlus100);
-        checkPositiveNegative(userNumberEntered);
+        alert(checkPositiveNegative(userNumberEntered));
     //Did the user enter a number and is it odd?
     } else if (userNumberEntered && !isUserNumberEven) {
         alert("Your number is odd.");
         alert("Your number + 100 is: " + userNumberPlus100);
-        checkPositiveNegative(userNumberEntered);
+        alert(checkPositiveNegative(userNumberEntered));
     //Did the user not enter a number?
-    } else if (!userNumberEntered) {
+    } else if (!userNumberChoice) {
         return
     } else {
         alert("You didn't enter a number.");
