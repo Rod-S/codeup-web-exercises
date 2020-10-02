@@ -159,9 +159,8 @@
 
 
 // TODO TOGETHER: Console.log each color from the array randomColors
+
 //  var randomColors = ["red","orange","yellow","blue","green"]
-
-
 // for (var i = 0; i < randomColors.length; i++){
 // 	console.log(randomColors[i]);;
 // }
