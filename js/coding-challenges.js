@@ -1,24 +1,27 @@
 //Narcissistic Numbers
 function narcissism() {
     var narcArray = [];
-    for (let n=1; narcArray.length < 25; n++) {
-        var nDigitArray = n.toString().split();
-        var singleDigitRaised = [];
-        var combinedDigits;
+    debugger
+    for (let n=0; narcArray.length < 25; ++n) {
+        var nDigitArray = n.toString().split("");
+        var singleDigitRaisedArray = [];
         var m = nDigitArray.length;
-        nDigitArray.forEach(nDigit => {
-                singleDigitRaised.push(Math.pow(nDigit, m));
+        var combinedDigits;
+        nDigitArray.forEach((nDigit) => {
+            singleDigitRaisedArray.push(Math.pow(Number(nDigit), m));
             });
-        console.log(singleDigitRaised);
-        if (singleDigitRaised.length > 1) {
-            combinedDigits = singleDigitRaised.reduce((a, b) => a + b, 0)
+        //console.log(singleDigitRaisedArray);
+        if (singleDigitRaisedArray.length > 1) {
+           combinedDigits = singleDigitRaisedArray.reduce((a, b) => a + b, 0)
         } else {
-            combinedDigits = singleDigitRaised[0];
+           combinedDigits = singleDigitRaisedArray[0];
         }
-    console.log("combinedDigits "+combinedDigits);
-        if (Number(combinedDigits) == Number(n)) {
-        narcArray.push(n);
-    }}
+        //console.log(combinedDigits);
+        if (combinedDigits == n) {
+            narcArray.push(n);
+            document.querySelector(".narcNumber").innerHTML = narcArray;
+        }
+    }
     console.log(narcArray);
 }
 narcissism();
