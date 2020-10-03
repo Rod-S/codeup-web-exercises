@@ -20,7 +20,22 @@ function narcissism() {
         }
     }
 }
-narcissism();
+// narcissism();
+
+//String Reversal
+//
+// Write a function that takes in a string variable and returns that string reversed.
+function reverse(string) {
+    var reverseChars = [];
+    var chars = string.split("");
+    for (var i=string.length-1; i>=0 ;i--) {
+        reverseChars.push(chars[i]);
+    }
+    document.querySelector(".stringReversal").innerHTML = "string to reverse = " + string + "\n" + " = " + reverseChars.join("");
+}
+reverse("lamb");
+
+
 
 // Sum Up Those Digits
 //
@@ -36,6 +51,6 @@ narcissism();
 function sumUp(num) {
     var userNumber = (typeof num !== "number") ? Number(num) : num;
     var userNumberDigits = userNumber.toString().split("");
-    document.querySelector(".sumUpNumber").innerHTML = userNumberDigits.reduce((a, b) => Number(a) + Number(b), 0);
+    document.querySelector(".sumUpNumber").innerHTML = "numbers to sum up = " + num + "\n" + " = " +userNumberDigits.reduce((a, b) => Number(a) + Number(b), 0);
 }
 sumUp(12345);
