@@ -1,15 +1,29 @@
-'use strict';
+// 'use strict';
+//
+// console.log("Hello Vivian");
+// console.log("Hello Sophie");
+// console.log("Hello Samuel");
+// console.log("Hello Brance");
+// console.log("Hello Rod");
+//
+// function sayHello(name) {
+//     console.log("Hello " + name);
+//     //we will talk about returning later!
+// }
+//
+// sayHello("Vivian");
+// sayHello("Sophie");
 
-console.log("Hello Vivian");
-console.log("Hello Sophie");
-console.log("Hello Samuel");
-console.log("Hello Brance");
-console.log("Hello Rod");
-
-function sayHello(name) {
-    console.log("Hello " + name);
-    //we will talk about returning later!
+function caseMatch(input) {
+    if (input === input.toUpperCase() || input === input.toLowerCase()) {
+        console.log(true)
+        return true
+    } else {
+        console.log(false)
+        return false
+    }
 }
 
-sayHello("Vivian");
-sayHello("Sophie");
+caseMatch("hello world")
+caseMatch("HELLO WORLD")
+caseMatch("heElLo WoRlD")
