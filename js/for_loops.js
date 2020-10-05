@@ -24,12 +24,12 @@
 
 //TODO 4. Create a for loop that uses console.log to create the output shown below
 
-for (var i=1; i<=9; i++) {
-    var stringI = i.toString();
-    for (var j=i; j>0; j--) {
-        console.log(stringI)
-    }
-}
+// for (var i=1; i<=9; i++) {
+//     var stringI = i.toString();
+//     for (var j=i; j>0; j--) {
+//         console.log(stringI)
+//     }
+// }
 
 //TODO 5. Create a for loop that uses console.log to create the output shown below.
 
