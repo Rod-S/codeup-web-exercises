@@ -4,15 +4,15 @@
 
 var userNumber;
 while (true) {
-    userNumber = prompt("Enter an odd number between 1-50");
+    userNumber = Number(prompt("Enter an odd number between 1-50"));
     if (userNumber % 2 !==0 && userNumber >= 1 && userNumber < 50) {
         break;
     }
 }
 console.log(`Number to skip is: ${userNumber}`)
 console.log('\n')
-for (i=1; i<=50; i+=2) {
-    if (i == userNumber) {
+for (var i=1; i<=50; i+=2) {
+    if (i === userNumber) {
         console.log(`Yikes! Skipping number: ${userNumber}`)
         // number isn't even
         // odd numbers aren't as cool
