@@ -21,6 +21,9 @@
 
     var planetsArrayBR = planetsArray.join("<br>");
     console.log(planetsArrayBR);
+    //useful to easily insert a variable into the DOM;
+
+
     /**
      * TODO BONUS:
      *Create another string that would display your planets in an undordered
