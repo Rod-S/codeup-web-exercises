@@ -45,7 +45,7 @@ var aphorisms = [
 	},
 	{
 		quote: "Whatever you are, be a good one.",
-		"name": "Abraham Lincoln"
+		author: "Abraham Lincoln"
 	},
 	{
 		quote: "Mathematics, you see, is not a spectator sport. To understand mathematics means to be able to do mathematics. And what does it mean [to be] doing mathematics? In the first place, it means to be able to solve mathematical problems",
