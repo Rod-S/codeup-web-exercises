@@ -29,7 +29,7 @@
      */
 
 person.sayHello = function() {
-    return this.firstName + " " + this.lastName;
+    return "Hello from " + this.firstName + " " + this.lastName + "!";
 }
 console.log(person.sayHello());
 
