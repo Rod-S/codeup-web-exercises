@@ -243,8 +243,8 @@ var chooseYourFighter = [
         },
         abilities: [
             "Karate",
-            "Bubble Blowing",
-            "Jelly Fishing"
+            "Sleeping",
+            "Not wearing a shirt"
         ]
     },{
         name: {
