@@ -310,7 +310,7 @@ function getRandomQuote(aphorisms) {
 function fiveRandomQuotes(aphorisms) {
 	var randomQuotesArray = [];
 	for (var i=0; i<5; i++){
-		var randomIndex = Math.floor(Math.random() * (aphorisms.length - 0) + 0)
+		var randomIndex = Math.floor(Math.random() * (aphorisms.length - 0))
 		randomQuotesArray.push(formatQuote(aphorisms[randomIndex]));
 	}
 	return randomQuotesArray;
@@ -330,7 +330,7 @@ function anonQuotes(aphorisms){
 
 //TODO: Write a function named 'everyOddQuote', that accepts the aphorisms array and returns an array of objects of every odd indexed quote. Each object should contain the following properties: { id: <INDEX_HERE>, quote: <QUOTE_HERE>, author: <AUTHOR_HERE>, rating: <RANDOM_RATING_HERE>}. The random rating should be a number between 1 and 5.
 
-function anonQuotes(aphorisms) {
+function everyOddQuote(aphorisms) {
 	var oddQuoteArray = [];
 	for (var i=1; i<aphorisms.length; i+=2) {
 		var oddQuote = {};
