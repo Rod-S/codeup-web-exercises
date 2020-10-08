@@ -194,8 +194,12 @@ console.log(person.sayHello());
     console.log(books);
     logOutBooks(books);
 
-    function showBookInfo(book) {
-
-    }
-
+    function showBookInfo(booksList) {
+            for (var i=0; i< booksList.length; i++){
+                console.log(`index of book #${i+1}: ${i}`);
+                console.log(`Book #${i+1} title: ${booksList[i].title}`);
+                console.log(`Book #${i+1} author: ${booksList[i].author.firstName} ${booksList[i].author.lastName}`)
+            }
+    };
+    showBookInfo(books);
 })();
