@@ -51,6 +51,7 @@ console.log(person.sayHello());
     function needToPay(shopper) {
         if (shopper.amount > hebOffer) {
             console.log(`Congratulations ${shopper.name}, you have earned a 12% coupon for use at HEB!`)
+            console.log (`Your total before discount is $${shopper.amount} and after your 12% discount is $${shopper.amount -(shopper.amount * .12)}`)
         } else {
             console.log(`Sorry, ${shopper.name}. It looks like you need to spend $${hebOffer - shopper.amount} to receive your HEB Offer!`);
         }
