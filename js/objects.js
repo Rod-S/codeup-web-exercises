@@ -149,6 +149,7 @@ console.log(person.sayHello());
 
     function logOutBooks(booksList) {
         for (var i=0; i< booksList.length; i++){
+            console.log("Book # " + (i+1))
             showBookInfo(booksList[i]);
         }
     };
