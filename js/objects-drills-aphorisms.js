@@ -301,7 +301,7 @@ function formatQuote(aphorism) {
 //TODO: Write a function named getRandomQuote, that accepts the aphorisms array, and returns a string that contains a random quote and author in the format "quote" + "-author".
 
 function getRandomQuote(aphorisms) {
-	var randomIndex = Math.floor(Math.random() * (aphorisms.length - 0) + 0)
+	var randomIndex = Math.floor(Math.random() * (aphorisms.length - 0))
 	return formatQuote(aphorisms[randomIndex]);
 }
 
@@ -322,7 +322,7 @@ function anonQuotes(aphorisms){
 	var anonArray = [];
 	aphorisms.forEach((aphorism) => {
 		if (aphorism.author === "anonymous") {
-			anonArray.push(formatQuote(aphorism));
+			anonArray.push({quote: aphorism.quote, author: aphorism.author});
 		}
 	})
 	return anonArray;
