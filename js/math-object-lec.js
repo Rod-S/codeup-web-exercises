@@ -103,7 +103,14 @@ console.log("The actual number represented by 4.58 x e^9 = " + (4.58 * Math.pow(
 // 4.58 x 10^9
 
 
+//pre-exercise warmup:
+//Write a method to find a random number within a range of 2 numbers (min and max)
 
+function randomizeNumber(min, max) {
+    return Math.floor(Math.random() * (max - min) + min);
+}
+
+console.log(randomizeNumber(1000, 2000));
 
 
 
