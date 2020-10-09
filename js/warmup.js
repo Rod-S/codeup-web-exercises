@@ -30,3 +30,11 @@
 
 //10/06 Debugging w/ Justin Reich
 
+
+//10/09
+
+function stringToArray(input) {
+    console.log(input.split(" "));
+    return input.split(" ")
+}
+stringToArray("This Old Man.");
