@@ -174,7 +174,63 @@ example 2:
 //black widow: Rod S, Jordy M, Ethan T, Aaron G
 
 
+// WARMUP 10/15
 
+// # HTML Forms Pre Lesson
+// 1. What HTTP methods can we use in forms?
+//
+// GET AND POST METHODS
+//
+//     2. What happens if we do not specify a method?
+// DEFAULT GET
+
+//     3. What is a `GET` method?
+//GET METHOD RETRIEVES INFORMATION FROM THE SERVER ONLY // DATA APPENDED TO URL QUERY
+
+//     4. What is a `POST` method?
+//POST METHOD IS USED TO CHANGE DATA ON THE SERVER
+
+//     5. What is the `action` attribute used for?
+//Action attribute is used to tell the form where to send data to
+
+//     6. What is a `query string`?
+//query strings are KV pairs representing your data for the server.
+
+//     7. How are query strings structured?
+// Starts with a ? after the url, key1 equals value1 separated by & for multiple queries
+
+//     8. How do we submit a form?
+//with a button or  input element of type "submit
+
+//     9. What are some common form input elements?
+// text inputs, text areas, radio buttons, checkboxes, selects, hidden elements
+
+//     10. How can we use name and value attributes?
+//an input name attribute can be associated with a query key, and value attribute can be associated with a query key for form submission
+
+//     11. How do you disable an input?
+//adding a disabled attribute
+
+//     12. How do you hide an input?
+//adding a hidden attribute
+
+//     13. What are `labels` used for?
+//labels are used to match input IDs. Useful for focusing on input elements and other selectors
+
+//    Bonus
+//     * Describe the following:
+// *   Text Inputs
+//text inputs are elements with a text box for the user to type into
+
+// *   Text Areas
+//text areas are similar to text inputs but allow the user to expand the text field.
+
+// *   Checkbox and Radio Buttons
+//checkboxes are box shaped and allow for multiple simultaneous boxes to be checked
+//radio buttons are circular and should only allow a single selected option among a list
+
+// *   Selects
+//selects are dropdown boxes that allow the user to choose a specific value
 
 
 
