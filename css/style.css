@@ -1,0 +1,4 @@
+.fancy-header {
+    color: purple; /* h1 still red from inline style attr */
+    text-decoration: underline;
+}
