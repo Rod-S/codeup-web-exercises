@@ -2,3 +2,42 @@
     color: purple; /* h1 still red from inline style attr */
     text-decoration: underline;
 }
+
+h1.fancy-header {
+    text-align: center;
+}
+
+h1, h2, h3 {
+    text-decoration: underline;
+    color: coral;
+}
+
+body {
+    font-family: "Lucida Console", Courier, monospace;
+    background-color: lightcyan;
+    background-image: url("../assets/img/3571518.svg");
+    background-repeat: no-repeat;
+    background-position:right;
+    position: relative;
+    background-attachment: fixed;
+}
+
+li {
+    list-style-type: square;
+}
+
+table, table img {
+    font-size: 20px;
+    padding-left: 10px;
+
+}
+td, tr {
+    padding-right: 15px
+}
+
+a:hover {
+    font-size: 30px;
+}
+a:visited {
+    color: darkviolet;
+}
