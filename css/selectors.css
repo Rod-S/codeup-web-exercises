@@ -21,10 +21,17 @@ em {
 /* selector for all elements with class="article" */
 .article {
     clear:both;
+    color: green;
+    padding-left:20px
+
 }
 
 /*  selector for all "anchor" elements
     that are a direct child of an element with class="article" */
 .article>a {
     float:right;
+}
+
+p {
+    padding-left: inherit;
 }

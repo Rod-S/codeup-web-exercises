@@ -11,15 +11,20 @@ h1, h2, h3 {
     text-decoration: underline;
     color: coral;
 }
+.fancy-header+p {
+    text-align:center;
+}
 
 body {
     font-family: "Lucida Console", Courier, monospace;
     background-color: lightcyan;
     background-image: url("../assets/img/3571518.svg");
     background-repeat: no-repeat;
-    background-position:right;
+    background-position:bottom right;
     position: relative;
     background-attachment: fixed;
+    padding-left: 30px;
+    background-size: 26.5%;
 }
 
 li {
@@ -32,7 +37,15 @@ table, table img {
 
 }
 td, tr {
-    padding-right: 15px
+    text-align: left
+}
+
+td {
+
+}
+
+img {
+    padding: inherit;
 }
 
 a:hover {
