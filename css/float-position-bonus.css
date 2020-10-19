@@ -1,0 +1,38 @@
+body, html {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    font-family: Arial, Ubuntu, sans-serif;
+}
+
+.blue {
+    background-color: rgb(0, 37, 90);
+    width: calc(12.5% / 2);
+    height: calc(50% / 2);
+    float:left;
+}
+
+.white {
+    background-color: white;
+    width: 15%;
+    height: calc(25% / 2);
+    display: flex;
+    position: relative;
+}
+
+.red {
+    background-color: rgb(196,21,43);
+    width: 15%;
+    height: calc(25% / 2);
+    display: flex;
+    position: relative;
+}
+
+.star {
+    margin-top: 50%;
+    content: "\2605";
+    color: white;
+    height: 50px;
+    font-size: 75px;
+    text-align: center;
+}
