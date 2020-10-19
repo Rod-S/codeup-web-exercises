@@ -1,0 +1,82 @@
+/*1) !*How does the unset CSS property work?*!*/
+/*                FROM MDN*/
+/*The unset CSS keyword resets a property to its inherited value if the property naturally inherits from its parent, and to its initial value if not. In other words, it behaves like the inherit keyword in the first case, when the property is an inherited property, and like the initial keyword in the second case, when the property is a non-inherited property.*/
+/*unset can be applied to any CSS property, including the CSS shorthand all.*/
+/*.foo {*/
+/*    color: blue;*/
+/*}*/
+/*p {*/
+/*     color: red;*/
+/* }*/
+/*.bar {*/
+/*    color: green;*/
+/*}*/
+/*.bar p {*/
+/*    color: unset;*/
+/*}*/
+/*NUMBER 2*/
+/*   the inherit keyword*/
+/*-setting a CSS selector property to "inherit" will cause it to take the value of whatever value the selector's parent value is.*/
+/*selector for all elements with class="article"*/
+/*.article {*/
+/*    clear:both;*/
+/*    color: green;*/
+/*    padding-left:20px*/
+/*}*/
+/*!*p elements that are children of the class article will inherit the prop:value for padding-left:20px*!*/
+/*p {*/
+/*    padding-left: inherit;*/
+/*    color: inherit;*/
+/*}*/
+/*!*Number 3  How can CSS transform rotate or change the size of a displayed element?*!*/
+/*.container> .p1{*/
+/*    width: 150px;*/
+/*    height: 150px;*/
+/*    background-color: black;*/
+/*    color: aliceblue;*/
+/*    transform: rotate(90deg);*/
+/*}*/
+/*.container> .p2{*/
+/*    width: 150px;*/
+/*    height: 150px;*/
+/*    background-color: black;*/
+/*    color: aliceblue;*/
+/*    transform: rotate(-90deg);*/
+/*}*/
+/*.container> .p3{*/
+/*    width: 150px;*/
+/*    height: 150px;*/
+/*    background-color: black;*/
+/*    color: aliceblue;*/
+/*    transform: rotate(180deg);*/
+/*}*/
+/*.container> .p4{*/
+/*    width: 150px;*/
+/*    height: 150px;*/
+/*    background-color: black;*/
+/*    color: aliceblue;*/
+/*    transform: rotate(-180deg);*/
+/*}*/
+/*number 4*/
+/*How do CSS transitions work (focus on a simple example)?*/
+.box1 {
+    width: 100px;
+    height: 100px;
+    background: red;
+    transition: width 6s;
+}
+.box1:hover {
+    width: 300px;
+}
+.box2 {
+    width: 100px;
+    height: 100px;
+    transition: ease 6s;
+    color: black;
+    background: green;
+}
+.box2:hover {
+    opacity: 0;
+    color: white;
+    background: white;
+}
