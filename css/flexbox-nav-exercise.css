@@ -61,7 +61,7 @@ nav a {
     display: inline-block;
     text-decoration: none;
     color: black;
-    text-wrap: none;
+    white-space: nowrap;
 
 }
 
