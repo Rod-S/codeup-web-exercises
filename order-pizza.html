@@ -40,19 +40,19 @@
         </div>
         <h2 class="mb-2">Build your own pizza!</h2>
         <ul class="nav nav-tabs" role="tablist">
-            <li class="nav-item" role="tab">
-                <a class="nav-link active" href="#"><span class="badge badge-pill badge-secondary">1</span> Size and crust</a>
+            <li class="nav-item">
+                <a class="nav-link active" id="tab_crust" data-toggle="tab" role="tab" href="#size_crust"  role="tab" aria-controls="size_crust" aria-selected="true"><span class="badge badge-pill badge-secondary">1</span> Size and crust</a>
             </li>
-            <li class="nav-item" role="tab">
-                <a class="nav-link" href="#"><span class="badge badge-pill badge-secondary">2</span> Cheese and sauce</a>
+            <li class="nav-item">
+                <a class="nav-link" id="tab_cheese_sauce" data-toggle="tab" role="tab" href="#cheese_sauce" aria-controls="cheese_sauce" aria-selected="false"><span class="badge badge-pill badge-secondary">2</span> Cheese and sauce</a>
             </li>
-            <li class="nav-item" role="tab">
-                <a class="nav-link" href="#"><span class="badge badge-pill badge-secondary">3</span> Toppings</a>
+            <li class="nav-item">
+                <a class="nav-link" id="tab_toppings" data-toggle="tab" role="tab" href="#toppings" aria-controls="toppings" aria-selected="false"><span class="badge badge-pill badge-secondary">3</span> Toppings</a>
             </li>
         </ul>
-
+        <div class="tab-content" id="myTabContent">
 <!--        SIZE AND CRUST TAB-->
-        <div class="card" role="tabpanel" id="size_crust">
+        <div class="card tab-pane fade show active" role="tabpanel" id="size_crust" aria-labelledby="tab_crust">
             <div class="card-header bg-primary text-white">
                 Choose size and crust
             </div>
@@ -109,10 +109,8 @@
             </div>
         </div>
 <!--        END SIZE AND CRUST TAB-->
-
 <!--        START CHEESE AND SAUCE TAB-->
-
-        <div class="card" role="tabpanel" id="cheese_sauce">
+        <div class="card tab-pane fade" role="tabpanel" id="cheese_sauce" aria-labelledby="tab_cheese_sauce">
             <div class="card-header bg-primary text-white">
                 Choose cheese and sauce
             </div>
@@ -173,7 +171,7 @@
         </div>
 <!--        END CHEESE AND SAUCE TAB-->
 <!--        START TOPPINGS TAB-->
-        <div class="card" role="tabpanel" id="toppings">
+        <div class="card tab-pane fade" role="tabpanel" id="toppings" aria-labelledby="tab_toppings">
             <div class="card-header bg-primary text-white">
                 Choose toppings
             </div>
@@ -183,46 +181,63 @@
                         Choose Meats
                     </div>
                     <ul class="input-group">
-                            <div class="form-check">
-                                <div>
-                                 <input class="form-check-input position-static" type="checkbox" id="blankCheckbox1" value="option1" aria-label="..."> Beef
-                                </div>
-                                    <div>
-                                   <input class="form-check-input position-static" type="checkbox" id="blankCheckbox2" value="option2" aria-label="..."> Ham
-                                 </div>
-                                <div>
-                                    <input class="form-check-input position-static" type="checkbox" id="blankCheckbox3" value="option3" aria-label="..."> Philly Steak
-                                </div>
-                                <div>
-                                    <input class="form-check-input position-static" type="checkbox" id="blankCheckbox4" value="option4" aria-label="..."> Bacon
-                                </div>
-                                </div>
+                        <div class="form-check">
+                            <div>
+                             <input class="form-check-input position-static" type="checkbox" id="topping_beef" value="option1" aria-label="..."> Beef
+                            </div>
+                            <div>
+                               <input class="form-check-input position-static" type="checkbox" id="topping_ham" value="option2" aria-label="..."> Ham
+                             </div>
+                            <div>
+                                <input class="form-check-input position-static" type="checkbox" id="topping_philly" value="option3" aria-label="..."> Philly Steak
+                            </div>
+                            <div>
+                                <input class="form-check-input position-static" type="checkbox" id="topping_bacon" value="option4" aria-label="..."> Bacon
+                            </div>
+                        </div>
                     </ul>
                 </div>
-            <div class="card-body">
                 <div class="card">
                     <div class="card-header">
-                        Choose Non-Meats
+                        Choose Meats
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">What Type?
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect3"></label>
-                                <select class="form-control" id="exampleFormControlSelect3">
-                                    <option>Tomato sauce</option>
-                                    <option>Marinara sauce</option>
-                                    <option>BBQ Sauce</option>
-                                    <option>Alfredo Sauce</option>
-                                </select>
+                    <ul class="input-group">
+                        <div class="form-check">
+                            <div>
+                                <input class="form-check-input position-static" type="checkbox" id="topping_green-pepper" value="option1" aria-label="..."> Green Peppers
                             </div>
-                        </li>
+                            <div>
+                                <input class="form-check-input position-static" type="checkbox" id="topping_mushroom" value="option2" aria-label="..."> Mushrooms
+                            </div>
+                            <div>
+                                <input class="form-check-input position-static" type="checkbox" id="topping_onion" value="option3" aria-label="..."> Onions
+                            </div>
+                            <div>
+                                <input class="form-check-input position-static" type="checkbox" id="topping_jalapeno" value="option4" aria-label="..."> Jalapeño Peppers
+                            </div>
+                        </div>
                     </ul>
+                    <div class="card-footer text-muted text-right">
+                        <a href="#" class="btn btn-primary">Checkout <i class="fa fa-shopping-cart"></i></a>
+                    </div>
                 </div>
             </div>
-            <div class="card-footer text-muted text-right">
-                <a href="#" class="btn btn-primary">Checkout <i class="fa fa-shopping-cart"></i></a>
-            </div>
-        </div>
 <!--        END TOPPINGS TAB-->
+<!--            <script>-->
+<!--                $('#tab_crust').on('click', function (e) {-->
+<!--                    e.preventDefault()-->
+<!--                    $(this).tab('show');-->
+<!--                });-->
+<!--                $('#tab_cheese_sauce').on('click', function (e) {-->
+<!--                    e.preventDefault()-->
+<!--                    $(this).tab('show');-->
+<!--                });-->
+<!--                $('#tab_toppings').on('click', function (e) {-->
+<!--                    e.preventDefault()-->
+<!--                    $(this).tab('show');-->
+<!--                })-->
+<!--            </script>-->
+        </div>
+        </div>
 </body>
 </html>
