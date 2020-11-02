@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bom Lesson</title>
+</head>
+<body>
+    <h1>This is the BOM</h1>
+
+    <script>
+        (function() {
+        'use strict';
+
+        //TODO: Write a setInterval();
+
+        var count = 0;
+        var max = 10;
+        var interval = 1000;
+        var intervalId = setInterval(function() {
+                if (count >= max) {
+                    clearInterval(intervalId);
+                    console.log("All done");
+                } else {
+                    count++;
+                    console.log("Repeating this line " + count);
+                }
+            }, interval);
+        console.log(intervalId);
+
+        var delay = 5000; // delay time in milliseconds
+
+        var timeoutId = setTimeout(function () {
+            alert('Here is a delayed hello!');
+        }, delay);
+
+        var cancel = confirm("Going to cancel your timeout?");
+
+        if (cancel) {
+            clearTimeout(timeoutId);
+        }
+
+// to cancel the timeout, you can call
+// clearTimeout(timeoutId);
+// prior to the delay expiring
+
+
+        })()
+    </script>
+</body>
+</html>
