@@ -33,18 +33,95 @@
         style: 'mapbox://styles/mapbox/streets-v9',
         zoom: 20,
     }
-
+    var favRestaurants = [
+        {
+            name: "Cyclone Anaya's",
+            address: "800 Town and Country Blvd, Houston, TX 77024",
+            offset: {
+                offset: [-50,130]
+            }
+        },
+        {
+            name: "Snooze A.M.",
+            address: "600 West Sam Houston Pkwy N #500, Houston, TX 77024",
+            offset: {
+                offset: null
+            }
+        },
+        {
+            name: "Pappasitos",
+            address: "10409 Interstate 10 Frontage Rd, Houston, TX 77024",
+            offset: null
+        }
+    ]
     var map = new mapboxgl.Map(mapboxOptions);
 
-    geocode("800 Town and Country Blvd, Houston, TX 77024", mapboxToken).then(function(result) {
-        console.log(result);
-        map.setCenter(result);
-        map.setZoom(18);
 
-        new mapboxgl.Marker({offset: [-50,130]})
-            .setLngLat(result)
-            .addTo(map)
-    });
+    function addAllGeocodes(array) {
+        for (var i=0; i < array.length; i++) {
+            geocode(array[i].address, mapboxToken, array)
+                .then(function (result, array) {
+                    console.log(array[i]);
+                    console.log(result);
+                    map.setCenter(result);
+                    map.setZoom(15);
+                    if (array[i].offset) {
+                        new mapboxgl.Marker({offset: array[i].offset})
+                            .setLngLat(result)
+                            .addTo(map);
+                        new mapboxgl.Popup({offset: array[i].offset})
+                            .setLngLat(result)
+                            .setHTML(array.name)
+                            .addTo(map);
+                    } else {
+                        new mapboxgl.Marker()
+                            .setLngLat(result)
+                            .addTo(map);
+                        new mapboxgl.Popup()
+                            .setLngLat(result)
+                            .setHTML(array.name)
+                            .addTo(map);
+                    }
+                });
+            }
+        }
+
+    addAllGeocodes(favRestaurants);
+
+    // geocode("800 Town and Country Blvd, Houston, TX 77024", mapboxToken).then(function(result) {
+    //     console.log(result);
+    //     map.setCenter(result);
+    //     map.setZoom(18);
+    //
+    //     var favRestMarker1 = new mapboxgl.Marker({offset: [-50,130]})
+    //         .setLngLat(result)
+    //         .addTo(map);
+    //
+    //
+    //     var favRestPopup = new mapboxgl.Popup({offset: [-50,130]})
+    //         .setLngLat(result)
+    //         .setHTML("<p>Cyclone Anaya</p>")
+    //         .addTo(map);
+    //     favRestMarker1.setPopup(favRestPopup);
+    //     favRestMarker1.onClick(favRestMarker.setPopup(favRestPopup));
+    //
+    //
+    // });
+    //
+    // geocode("600 West Sam Houston Pkwy N #500, Houston, TX 77024", mapboxToken).then(function(result) {
+    //     var favRestMarker2 = new mapboxgl.Marker({offset: [-50,130]})
+    //         .setLngLat(result)
+    //         .addTo(map);
+    // });
+    //
+    // geocode("500 Plaza Way, Houston, TX 77024", mapboxToken).then(function(result) {
+    //     var favRestMarker1 = new mapboxgl.Marker({offset: [-50,130]})
+    //         .setLngLat(result)
+    //         .addTo(map);
+    // });
+
+
+
     //yes zoom can be changed later either through user interaction and timed functions
 
 </script>
