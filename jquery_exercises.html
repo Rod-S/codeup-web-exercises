@@ -8,11 +8,23 @@
     <title>jQuery Exercises</title>
 </head>
 <body>
+<h1 id="titleHeader" class="header">jQuery</h1>
+<div id="firstDiv" class="div-categories">
+    <p id="movieParagraph" class="paragraphs-style"></p>
+    <ul id="moviesList">
+        <li id="movies_1" class="movie-list-item"></li>
+        <li id="movies_2" class="movie-list-item"></li>
+        <li id="movies_3" class="movie-list-item"></li>
+    </ul>
+</div>
+
 <script src="js/jQuery-3.5.1.min.js"></script>
 <script>
     $(document).ready(function() {
         "use strict";
         alert("DOM HAS FINISHED LOADING");
+        alert($('#firstDiv').html());
+
     })
 </script>
 </body>
