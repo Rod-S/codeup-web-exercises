@@ -232,11 +232,45 @@ example 2:
 // *   Selects
 //selects are dropdown boxes that allow the user to choose a specific value
 
+// function capitalizeName(str) {
+//     var strArr = str.split(' ');
+//     var first = strArr[0].charAt(0).toUpperCase() + strArr[0].slice(1);;
+//     console.log(first);
+//     var last = strArr[1].charAt(0).toUpperCase() + strArr[1].slice(1);
+//     console.log(last);
+//     if (strArr[0].charAt(0) == first && strArr[1].charAt(0) == last) {
+//
+//     } else {
+//         return first + " " + last;
+//     }
+// }
+//
+// console.log(capitalizeName("ron Weasley"));
+//
+//
+//
 
 
+// function remove9s(arr) {
+//     var array = arr;
+//     array = array.filter((e) => {
+//         e !=9
+//     })
+//     return array
+// }
+//
+// console.log(remove9s([7,8,9,10]))
 
+function capitalizeName(str) {
+    var strArr = str.split(' ');
+    var first = strArr[0].charAt(0).toUpperCase() + strArr[0].slice(1);
+    console.log(first);
+    var last = strArr[1].charAt(0).toUpperCase() + strArr[1].slice(1);
+    console.log(last);
+    if (strArr[0].charAt(0) == first && strArr[1].charAt(0) == last) {
 
-
-
-
-
+    } else {
+        return first + " " + last;
+    }
+}
+console.log(capitalizeName("ron Weasley"));
