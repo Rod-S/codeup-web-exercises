@@ -8,13 +8,13 @@
     <title>jQuery Exercises</title>
 </head>
 <body>
-<h1 id="titleHeader" class="header">jQuery</h1>
-<div id="firstDiv" class="div-categories">
-    <p id="movieParagraph" class="paragraphs-style"></p>
+<h1 id="titleHeader" class="codeup">jQuery</h1>
+<div id="firstDiv" class="codeup">
+    <p id="movieParagraph" class="codeup">MOVIES LIST!</p>
     <ul id="moviesList">
-        <li id="movies_1" class="movie-list-item"></li>
-        <li id="movies_2" class="movie-list-item"></li>
-        <li id="movies_3" class="movie-list-item"></li>
+        <li id="movies_1" class=" codeup movie-list-item">Movie 1</li>
+        <li id="movies_2" class="movie-list-item">Movie 2</li>
+        <li id="movies_3" class="movie-list-item">Movie 3</li>
     </ul>
 </div>
 
@@ -22,8 +22,7 @@
 <script>
     $(document).ready(function() {
         "use strict";
-        alert("DOM HAS FINISHED LOADING");
-        alert($('#firstDiv').html());
+    $('.codeup').css({"border": "1px solid red"})
 
     })
 </script>
