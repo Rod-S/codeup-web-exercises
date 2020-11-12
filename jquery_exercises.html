@@ -22,9 +22,18 @@
 <script>
     $(document).ready(function() {
         "use strict";
-    $('h1, p, li').css({"background-color": "yellow","font-size": "20px"});
-    alert($("h1").html())
+        $('h1').click(function(e) {
+           $(e.target).css('background-color', 'blue');
+        });
     })
+    $('p').dblclick(function(e) {
+        $(e.target).css('font-size', '18px');
+    })
+    $('li').hover(function(e){
+        $(e.target).css("color", "red");
+    }, function(e){
+        $(e.target).css("color", 'black');
+    });
 </script>
 </body>
 </html>
