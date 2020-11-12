@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>KONAMI CODE</title>
+</head>
+<body style="margin-left: 50%">
+<h1 id="titleHeader" class="codeup" style="display:none;font-size: xxx-large;padding-left:30%">KONAMI CODE</h1>
+<audio id="audio" src="assets/audio/MGS_alert.mp3"></audio>
+<script src="js/jQuery-3.5.1.min.js"></script>
+<script>
+
+    var konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+    var userCode = [];
+    var konamiCodeEntered = false;
+
+    function konamiCodeCheck() {
+        if (userCode.length > 10) {
+            userCode.shift();
+        }
+        if (userCode.length === 10 && (konamiCodeEntered = konamiCode.every(value => userCode.indexOf(value) !== -1))) {
+            console.log('user code: ' + userCode);
+            console.log('konami code: ' + konamiCode);
+            console.log("KONAMI CODE! " + konamiCodeEntered);
+            konamiMessage();
+        } else {
+        console.log('user code: ' + userCode);
+        console.log('konami code: ' + konamiCode);
+        }
+    }
+
+    function konamiMessage() {
+            userCode = [];
+            konamiCodeEntered = false;
+            $('#audio')[0].play();
+            $('#titleHeader').show();
+            $('body').css({
+                'background-image': "url('assets/img/konami_logo.png')",
+                'background-repeat': 'no-repeat'
+            });
+    }
+
+    $(document).keyup(function(e) {
+        userCode.push(e.key);
+        konamiCodeCheck();
+    });
+
+
+</script>
+</body>
+</html>

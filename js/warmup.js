@@ -261,16 +261,39 @@ example 2:
 //
 // console.log(remove9s([7,8,9,10]))
 
-function capitalizeName(str) {
-    var strArr = str.split(' ');
-    var first = strArr[0].charAt(0).toUpperCase() + strArr[0].slice(1);
-    console.log(first);
-    var last = strArr[1].charAt(0).toUpperCase() + strArr[1].slice(1);
-    console.log(last);
-    if (strArr[0].charAt(0) == first && strArr[1].charAt(0) == last) {
+// function capitalizeName(str) {
+//     var strArr = str.split(' ');
+//     var first = strArr[0].charAt(0).toUpperCase() + strArr[0].slice(1);
+//     console.log(first);
+//     var last = strArr[1].charAt(0).toUpperCase() + strArr[1].slice(1);
+//     console.log(last);
+//     if (strArr[0].charAt(0) == first && strArr[1].charAt(0) == last) {
+//
+//     } else {
+//         return first + " " + last;
+//     }
+// }
+// console.log(capitalizeName("ron Weasley"));
 
-    } else {
-        return first + " " + last;
-    }
-}
-console.log(capitalizeName("ron Weasley"));
+// WARMUP 11/12
+// ================================= PEER INTERVIEW
+// Who is Jake Weary?
+//     Jake Weary is an actor, not to be confused with jQuery
+// What is jQuery?
+//     jQuery is a javascript library providing several tools to developers to select and modify various elements in the DOM statically and dynamically
+// Why use a locally stored copy of the jQuery source code vs. a CDN link?
+//      Locally stored source code is a failsafe for if the CDN link is down for any reason or gets changed in some way
+// What is the difference between the return value of these two expressions?
+//   1) document.getElementById(‘some-id’);
+//   2) $(‘#some-id’)
+//      the jquery expression returns a jQuery object with access to all of the jQuery library of object methods and props
+// What determines if a given jQuery method will allow another jQuery method to be chained?
+//      Whether or not the return value is a jQuery object
+// jQuery syntax to target a DOM element is succinct, but what plain JavaScript method have we already explored in class that offers a similar succinctness?
+//      document.querySelector('')
+// Use of the $(document).ready() method serves two primary purposes; what are they?
+// Built in iife statement, it also allows the DOM to fully render before executing code, with the exception of images
+//     What is the difference between these two statements, other than syntax?
+//     1. jQuery(‘body’).css(‘color’, ‘red’);
+//     2. $(‘body’).css(‘color’, ‘red’);
+//The $ is a shorthand method of calling jQuery
