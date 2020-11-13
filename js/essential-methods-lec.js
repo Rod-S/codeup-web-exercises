@@ -34,7 +34,7 @@ $(document).ready(function() {
 
     var gryffindor = $('#gryffindor').html();
     // console.log($('#gryffindor')[0]);
-    console.log(gryffindor);
+    // console.log(gryffindor);
 
     // TODO TOGETHER: store the html of #main-heading in a variable named mainHeading
 
@@ -52,7 +52,7 @@ $(document).ready(function() {
 
     // TODO TOGETHER: using the css method, grab the current width of the sorting hat img. Console log your results
 
-    console.log($('img').css('width'));
+    // console.log($('img').css('width'));
 
     /************
      *   CSS
@@ -135,9 +135,38 @@ $(document).ready(function() {
      *********************************************/
 
     //TODO TOGETHER: Using the each method, highlight every other list item in the Ravenclaw house
-    //TODO TOGETHER: Change the font color of the first list element in Hufflepuff
-    //TODO TOGETHER: Change the font color of the last list element in Slytherin
+    // console.log($('li'));
+    // $('li').each(function(index, element) {
+    //     console.log(element);
+    // })
 
+    // $('li').each(function(element, index) {
+    //     if (index % 2 !== 0) {
+    //         $(this).css('background-color', '#FF0');
+    //     }
+    // });
+    console.log($('#first').children());
+
+    $('#ravenclaw').children().each(function(index, element) {
+        if (index % 2 !== 0) {
+            $(element).css('background-color', '#FF0');
+        }
+    });
+
+    //TODO TOGETHER: Change the font color of the first list element in Hufflepuff
+    // $('#hufflepuff').children().each(function(index, element) {
+    //     if (index == 0) {
+    //         $(this).css('color', '#FF0');
+    //     }
+    // });
+    $('#hufflepuff').children().first().css("color", "yellow")
+
+    //TODO TOGETHER: Change the font color of the last list element in Slytherin
+    $('#slytherin').children().each(function(index, element) {
+        if (index == $('#slytherin').children().length-1) {
+            $(this).css('color', 'green');
+        }
+    });
     //TODO TOGETHER: When the 'Witches' button is clicked, highlight all names that have been assigned the class of 'witches'
     $('#highlight-witches').click(function(e){
         $('li').each(function(){
