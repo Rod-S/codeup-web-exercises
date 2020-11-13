@@ -14,8 +14,29 @@
     .highlight {
         background-color: yellow;
     }
+    .btn {
+
+    }
+    .frame {
+        width: 300px;
+        height: 250px;
+        border: 3px solid #ccc;
+        background: #eee;
+        margin: auto;
+        padding: 15px 10px;
+        display: inline-flex;
+    }
+    img {
+        width: 100%;
+        height: 100%;
+    }
 </style>
 <body>
+<div>
+    <h1>Would you like to sign up for our newsletter?</h1>
+    <span>X</span>
+</div>
+
 <p>CELESTIAL BODIES<span><button class="showDef">SHOW DEFINITIONS</button></span></p>
 
 <dl>
@@ -62,6 +83,51 @@
 
 </dl>
 
+<div class="firstListDiv">
+    <h3>Jupiter</h3>
+    <button class="showLiHighlight">Highlight Last List Items</button>
+    <ul class="firstList">
+        <li>Jupiter is the largest of the Jovian planets.</li>
+        <li>Jupiter is coincidentally the name of the best Codeup cohort.</li>
+        <li>Jupiter's gravity is known to shred comets flying through the solar system.</li>
+        <li>Jupiter is so dense, hydrogen is found in a metallic state in its lower layers.</li>
+    </ul>
+</div>
+<div class="secondListDiv">
+    <h3>Andromeda</h3>
+    <ul class="secondList">
+        <li>Named after a Greek princess.</li>
+        <li>Andromeda is on a collision course with the Milky Way.</li>
+        <li>Andromeda's doppler shift is towards the violet end of the spectrum, proving it's moving towards us.</li>
+        <li>When you look up at Andromeda, you're seeing it's light that took 2.5 million years to travel to your eyes.</li>
+    </ul>
+</div>
+<div class="thirdListDiv">
+    <h3>Europa</h3>
+    <ul class="thirdList">
+        <li>Scientists believe if there is life other than on Earth in the solar system, it lives within Europa's liquid oceans.</li>
+        <li>The ice layer separating Europa's surface and liquid oceans is miles thick.</li>
+        <li>Europa's oceans are hot enough to be liquid not by Europa's internal processes, but by Jupiter's radiation and tidal pull.</li>
+        <li>"ALL THESE WORLDS ARE YOURS – EXCEPT EUROPA.
+            ATTEMPT NO LANDINGS THERE."</li>
+    </ul>
+</div>
+
+<div>
+    <div style="display: inline">
+        <div class="frame frame1"><img src="assets/img/dog-logo.jpg"></div>
+        <button class="btn frame1Btn">Frame 1 Button</button>
+    </div>
+    <div style="display: inline">
+        <div class="frame frame2"><img src="assets/img/pizza.png"></div>
+        <button class="btn frame2Btn">Frame 2 Button</button>
+    </div>
+    <div style="display: inline">
+        <div class="frame frame3"><img src="assets/img/sortinghat.png"></div>
+        <button class="btn frame3Btn">Frame 3 Button</button>
+    </div>
+</div>
+
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -82,6 +148,53 @@ $('.showDef').click(function() {
 $('dt').click(function() {
     $(this).toggleClass('highlight');
 })
+
+$('.showLiHighlight').click(function(){
+    $('ul').each(function() {
+        $(this).children(":last").css("background-color", "yellow")
+    })
+})
+
+$('h3').click(function() {
+    $(this).siblings(":last").children().css('font-weight', "bold");
+})
+
+$('li').click(function() {
+    $(this).parent().children(":first").css('color', 'blue');
+})
+
+//RNG
+let getRandomNumber = (max) => {
+    return Math.floor(Math.random() * Math.floor(max));
+};
+//swap left image with center image
+$('.frame1Btn').click(function() {
+    var frame1img = $(".frame1 > img").attr("src");
+    var frame2img = $(".frame2 > img").attr("src");
+    $(".frame1 > img").attr("src", frame2img);
+    $(".frame2 > img").attr("src", frame1img);
+});
+//swap center image randomly with left or right image
+$('.frame2Btn').click(function() {
+    var frame1img = $(".frame1 > img").attr("src");
+    var frame2img = $(".frame2 > img").attr("src");
+    var frame3img = $(".frame3 > img").attr("src");
+    if (getRandomNumber(2) === 1) {
+        $(".frame2 > img").attr("src", frame3img);
+        $(".frame3 > img").attr("src", frame2img);
+    } else {
+        $(".frame2 > img").attr("src", frame1img);
+        $(".frame1 > img").attr("src", frame2img);
+    }
+})
+//swap right image with center image
+$('.frame3Btn').click(function() {
+    var frame2img = $(".frame2 > img").attr("src");
+    var frame3img = $(".frame3 > img").attr("src");
+    $(".frame2 > img").attr("src", frame3img);
+    $(".frame3 > img").attr("src", frame2img);
+})
+
 </script>
 </body>
 </html>
