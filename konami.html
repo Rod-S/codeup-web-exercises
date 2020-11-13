@@ -14,8 +14,6 @@
 <script>
 
     var konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-    // var userCode  = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-
     var userCode = [];
     var konamiCodeEntered = false;
 
@@ -23,7 +21,10 @@
         if (userCode.length > 10) {
             userCode.shift();
         }
-        if (userCode.length === 10 && (konamiCodeEntered = konamiCode.every((element, index) => userCode.indexOf(element, index) !== -1))) {
+        if (userCode.length === 10
+            && (konamiCodeEntered = konamiCode.every((element) =>
+                    userCode.indexOf(element) === konamiCode.indexOf(element))
+            )) {
             console.log('user code: ' + userCode);
             console.log('konami code: ' + konamiCode);
             console.log("KONAMI CODE! " + konamiCodeEntered);
