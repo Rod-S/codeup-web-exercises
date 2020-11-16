@@ -297,3 +297,22 @@ example 2:
 //     1. jQuery(‘body’).css(‘color’, ‘red’);
 //     2. $(‘body’).css(‘color’, ‘red’);
 //The $ is a shorthand method of calling jQuery
+
+// // WARMUP 11/16
+//
+// -- Reading Questions
+// What is AJAX and what is it used for?
+// -Asynchronous Javascript and XML
+// used to send and receive data from web servers
+// What is JSON and what is it used for?
+//  Javascript object notation; universal format for sending data across servers in objects
+// Can methods be included in a JSON file?
+//  No methods, only data structures
+//     What does ‘jqXhr’ represent in the curriculum AJAX examples?
+//jquery xml http request; replaces native javascript xmlhttprequest object
+//     What’s the difference between $.ajax() and $.get()?
+//$.get is a simplified $.ajax call with defaulted header values
+//     Is jQuery required to make AJAX requests?
+//no, javascript has a built in xml request object
+//     (optional) What possible real world example can you think of where AJAX might be used?
+// API requests, ie mapbox
