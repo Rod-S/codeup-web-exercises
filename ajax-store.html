@@ -25,7 +25,6 @@
 (function() {
     "use strict";
 
-
     var tableBuilder = function(objArr) {
         var tableHTML;
         objArr.forEach((dataObject) => {
@@ -38,7 +37,6 @@
         `})
         return tableHTML;
     }
-
 
     // TODO: Create an AJAX GET request for the file under data/inventory.json
     $.ajax("./data/inventory.json", {
