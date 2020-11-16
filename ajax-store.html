@@ -31,7 +31,7 @@
             tableHTML += `<tr>
                 <td>${dataObject.title}</td>
                 <td>${dataObject.quantity}</td>
-                <td>${dataObject.categories}</td>
+                <td>${dataObject.categories.map(x => " " + x)}</td>
                 <td>${dataObject.price}</td>
                 </tr>
         `})
