@@ -24,8 +24,29 @@
 <script>
 (function() {
     "use strict";
-    // TODO: Create an AJAX GET request for the file under data/inventory.json
 
+
+    var tableBuilder = function(objArr) {
+        var tableHTML;
+        objArr.forEach((dataObject) => {
+            tableHTML += `<tr>
+                <td>${dataObject.title}</td>
+                <td>${dataObject.quantity}</td>
+                <td>${dataObject.categories}</td>
+                <td>${dataObject.price}</td>
+                </tr>
+        `})
+        return tableHTML;
+    }
+
+
+    // TODO: Create an AJAX GET request for the file under data/inventory.json
+    $.ajax("./data/inventory.json", {
+        "type": "GET"}).done(function(data) {
+            console.log(data[2].categories.forEach((e) => {console.log(e)}))
+            $('#insertProducts').html(tableBuilder(data));
+        }
+    )
     // TODO: Take the data from inventory.json and append it to the products table
     //       HINT: Your data should come back as a JSON object; use console.log() to inspect
     //             its contents and fields
