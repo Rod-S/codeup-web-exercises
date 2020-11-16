@@ -41,7 +41,6 @@
     // TODO: Create an AJAX GET request for the file under data/inventory.json
     $.ajax("./data/inventory.json", {
         "type": "GET"}).done(function(data) {
-            console.log(data[2].categories.forEach((e) => {console.log(e)}))
             $('#insertProducts').html(tableBuilder(data));
         }
     )
