@@ -17,17 +17,28 @@
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
     <style>
+        .weather-icon {
+            text-align-last: center;
+
+        }
         img {
-            float: left;
-            max-width: 150px;
-            max-height: 150px;
-            margin: 20px;
+            /*float: left;*/
+            /*max-width: 150px;*/
+            /*max-height: 150px;*/
+            /*margin: 20px;*/
+            /*align: center;*/
         }
     </style>
 </head>
     <body>
+    <div class="container-fluid">
         <div class="jumbotron display-4 text-center" style="background-color: lightblue">SimpliWeather</div>
-        <div id="posts" class="container-fluid row">
+        <div class="row">
+            <div class="col-6">
+                <input id="citySearchText" type="text"><button type="submit">SEARCH</button></div>
+            <div class="currentCity col-6" style="text-align: right"><strong>Current City:</strong></div>
+        </div>
+        <div id="weather-cards" class="container-fluid row">
             <div class="card">
                 <div class="card-header">Loading Date</div>
                 <div class="card-body">
@@ -44,7 +55,7 @@
         </div>
         <br>
         <br>
-
+    </div>
         <script src="js/keys.js"></script>
         <script src="js/weather_map.js"></script>
     </body>
