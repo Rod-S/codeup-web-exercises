@@ -1,0 +1,24 @@
+{
+  "Name": "Bash",
+  "Number of Students": 2,
+  "Location": "Dallas, TX",
+  "Students": [
+    {
+      "Name": "Stacy R",
+      "DOB": "1990-01-24",
+      "Scholarship": true,
+      "Capstone": null
+    },
+    {
+      "Name": "Juan M",
+      "DOB": "1992-05-13",
+      "Scholarship": false,
+      "Capstone": null
+    }
+  ],
+  "Remote": false,
+  "Instructors": [
+    "Fernando M",
+    "Douglas H"
+  ]
+}
