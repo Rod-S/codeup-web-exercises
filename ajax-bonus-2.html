@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Quotes n Jokes!</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <style>
+        img {
+            float: left;
+            max-width: 150px;
+            max-height: 150px;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="jumbotron display-4 text-center" style="background-color: lightblue">QUOTES N' JOKES!</div>
+<div style="float: left"><button class="jokeBtn">GENERATE JOKE</button></div>
+<div style="float: left"><button class="quoteBtn">GENERATE QUOTE</button></div>
+
+<div id="posts" class="container-fluid row">
+    <div class="card">
+        <div class="card-header">Waiting for choice...</div>
+        <div class="card-body">
+            <blockquote class="blockquote mb-0">
+                <p>Waiting for choice...</p>
+                <br>
+            </blockquote>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<script>
+    (function() {
+        "use strict";
+
+        var htmlBuilder = function(obj, title) {
+            var quoteJokeHTML = `
+                    <div class="card">
+                        <div class="card-header">${title || obj.author}</div>
+                        <div class="card-body">
+                            <blockquote class="blockquote mb-0">
+                                <p>${obj.joke || obj.quote}</p>
+                                <br>
+                            </blockquote>
+                        </div>
+                    </div>
+                    <br>`;
+            return quoteJokeHTML;
+        }
+
+        function getJoke () {
+            $.ajax("http://api.icndb.com/jokes/random", {
+                "type": "GET",
+                dataType: 'jsonp',
+                crossDomain: true,
+                "headers": {
+                    "accept": "application/json",
+                    "Access-Control-Allow-Origin": "*"
+                }
+            }).done(function (data) {
+                    var joke = data.value;
+                    var title = "RANDOM CHUCK NORRIS JOKE"
+                    $('#posts').html(htmlBuilder(joke, title));
+                }
+            )
+        }
+
+        $('.jokeBtn').on("click", getJoke);
+
+    })();
+</script>
+</body>
+</html>

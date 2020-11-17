@@ -5,7 +5,7 @@
         "categories": [
             "greek"
         ],
-        "date": "January 25, 2015",
+        "date": "January 25, 2017",
         "image": "./assets/img/sortinghat.png"
     }, {
         "title": "The Second Post",
@@ -16,8 +16,8 @@
             "sweets",
             "sugar"
         ],
-        "date": "February 14, 2015",
-    "image": "./assets/img/sortinghat.png"
+        "date": "February 14, 2018",
+    "image": "./assets/img/dog-logo.jpg"
 
 },
     {
@@ -27,8 +27,8 @@
             "candy",
             "sweets"
         ],
-        "date": "February 15, 2015",
-        "image": "./assets/img/sortinghat.png"
+        "date": "February 15, 2019",
+        "image": "./assets/img/konami_logo.png"
 
     },
     {
@@ -38,7 +38,7 @@
             "family",
             "friends"
         ],
-        "date": "February 16, 2015",
-        "image": "./assets/img/sortinghat.png"
+        "date": "February 16, 2020",
+        "image": "./assets/img/dog-transparent.png"
     }
 ]
