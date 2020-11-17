@@ -13,7 +13,7 @@ $(document).ready(function() {
    }
 
    let convertWindSpeed = (currentWind) => {
-       return currentWind / 0.44704;
+       return (currentWind / 0.44704).toFixed(2);
    }
 
    //convert degrees to cardinal directions
@@ -23,8 +23,7 @@ $(document).ready(function() {
            return arr[(val % 16)];
    }
 
-   //user city input
-   let cityInput = "San Antonio";
+
 
     var blogEntryBuilder = function(obj) {
         var entryHTML ='';
@@ -38,9 +37,10 @@ $(document).ready(function() {
                                 <div>                             
                                     <p>Low: <strong>${obj.main.temp_min} °F</strong> / High: <strong>${obj.main.temp_max} °F</strong></p>
                                     <p> Description: <strong>${obj.weather[0].description}</strong></p>
-                                    <p> Humidity: <strong>${obj.main.humidity}</strong></p>
-                                    <p> Wind: <strong>${obj.wind.direction?.code || convertDegtoCardinal(obj.wind.deg)} ${convertWindSpeed(obj.wind.speed)}</strong></p>
-                                    <p> Pressure: <strong>${obj.main.pressure}</strong></p>
+                                    <p> Humidity: <strong>${obj.main.humidity}%</strong></p>
+                                    <p> Wind Speed: <strong>${convertWindSpeed(obj.wind.speed)} MPH</strong></p>
+                                    <p> Wind Direction: <strong>${obj.wind.direction?.code || convertDegtoCardinal(obj.wind.deg)}</strong></p>
+                                    <p> Pressure: <strong>${obj.main.pressure} hPa</strong></p>
                                 </div>
                         </div>
                     </div>
@@ -58,15 +58,35 @@ $(document).ready(function() {
     }).done(function (data) {
     	console.log(data);
     	$('#weather-cards').html(blogEntryBuilder(data));
-    	$('.currentCity').html("<strong>"+"Current City: "+"</strong>" + cityInput)
+    	$('.currentCity').html("<strong>"+"Current City: "+"</strong>" + city)
+    }).fail(function () {
+
     });
    }
 
+    getCurrentWeather("San Antonio")
 
+   $('#searchBtn').on('click', function(e) {
+       e.preventDefault();
+       //user city input
+       let cityInput = $('#citySearchText').val();
+       if (cityInput.trim() == "") {return}
+       console.log(cityInput);
+       getCurrentWeather(cityInput);
+    }
+   )
 
-   $('citySearchText').on('click', )
+    // Execute a function when the user releases a key on the keyboard
+    $('#citySearchText').on("keyup", function(event) {
+        // Number 13 is the "Enter" key on the keyboard
+        if (event.keyCode === 13) {
+            // Cancel the default action, if needed
+            event.preventDefault();
+            // Trigger the button element with a click
+            $('#searchBtn').click();
+        }
+    });
 
-   getCurrentWeather(cityInput);
 
 
 });

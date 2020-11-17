@@ -33,10 +33,27 @@
     <body>
     <div class="container-fluid">
         <div class="jumbotron display-4 text-center" style="background-color: lightblue">SimpliWeather</div>
+        <div>
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Current Weather (Single City)</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Weekly Forecast (Single City)</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Disabled</a>
+                </li>
+            </ul>
+        </div>
         <div class="row">
             <div class="col-6">
-                <input id="citySearchText" type="text"><button type="submit">SEARCH</button></div>
-            <div class="currentCity col-6" style="text-align: right"><strong>Current City:</strong></div>
+                <input id="citySearchText" type="text"><button id="searchBtn" type="submit">SEARCH</button>
+            </div>
+                <div class="currentCity col-6" style="text-align: right"><strong>Current City:</strong></div>
         </div>
         <div id="weather-cards" class="container-fluid row">
             <div class="card">
@@ -45,10 +62,7 @@
                     <blockquote class="blockquote mb-0">
                         <p>Loading Weather</p>
                         <br>
-                        <footer class="blockquote-footer">Loading Weather
-                            <br>
-                            <br>
-                            <cite title="Source Title">Categories: Loading Categories</cite></footer>
+
                     </blockquote>
                 </div>
             </div>
