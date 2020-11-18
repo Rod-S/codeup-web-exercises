@@ -28,23 +28,19 @@
         <div class="jumbotron display-4 text-center" style="background-color: lightblue">SimpliWeather</div>
         <div>
             <ul id="weatherNav" class="nav justify-content-center mb-4">
-                <li class="nav-item">
-                    <a id="currentWeather" class="nav-link" href="#">Current Weather (Single City)</a>
+                <li id="currentWeather" class="nav-item">
+                    <a class="nav-link" href="#">Daily Forecast (Single City)</a>
                 </li>
                 <li id="weeklyWeather" class="nav-item">
                     <a class="nav-link" href="#">Weekly Forecast (Single City)</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Disabled</a>
                 </li>
             </ul>
         </div>
         <div id="weatherRow" class="row">
             <div class="col-6">
-                <input id="citySearchText" type="text"><button id="searchBtn" type="submit" style="background-color: lightblue">SEARCH</button>
+                <input id="citySearchText" type="text" placeholder="Search a city...">
+                <button id="searchBtn" type="submit" style="background-color: lightblue">SEARCH</button>
+                <button id="clearBtn" type="submit" style="background-color: lightblue">CLEAR</button>
             </div>
                 <div id="currentCityText" class="currentCity col-6" style="text-align: right"><strong>Current City:</strong></div>
         </div>
@@ -54,6 +50,7 @@
         <br>
     </div>
         <script src="js/keys.js"></script>
+        <script src="js/mapbox-geocoder-utils.js"></script>
         <script src="js/weather_map.js"></script>
     </body>
 </html>

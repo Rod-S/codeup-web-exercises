@@ -13,7 +13,7 @@
  *  })
  *
  */
-function geocode(search, token, array) {
+function geocode(search, token) {
     var baseUrl = 'https://api.mapbox.com';
     var endPoint = '/geocoding/v5/mapbox.places/';
     return fetch(baseUrl + endPoint + encodeURIComponent(search) + '.json' + "?" + 'access_token=' + token)
