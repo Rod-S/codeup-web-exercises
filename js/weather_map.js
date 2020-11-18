@@ -5,19 +5,35 @@ $(document).ready(function() {
     let cityLat;
     let cityLon;
 
-   let getDate = (unixDate) => {
-       if (unixDate) {
-           var today = unixDate;
+   let getDate = (addDay) => {
+       if (addDay >= 0) {
+           var today = new Date();
+           today.setDate(today.getDate()+addDay)
+           var dd = String(today.getDate()).padStart(2, '0');
+           var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+           var yyyy = today.getFullYear();
+           if (addDay === 0) {
+               var todayFormat = "(TODAY) " + yyyy + '-' + mm + "-" + dd;
+           } else {
+               var todayFormat = yyyy + '-' + mm + "-" + dd;
+           }
        } else {
            var today = new Date();
-
+           var dd = String(today.getDate()).padStart(2, '0');
+           var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+           var yyyy = today.getFullYear();
+           var todayFormat = yyyy + '-' + mm + "-" + dd;
        }
-       var dd = String(today.getDate()).padStart(2, '0');
-       var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-       var yyyy = today.getFullYear();
-       var todayFormat = yyyy + '-' + mm + "-" + dd;
       return todayFormat;
    }
+
+    let getCoords = (cityInput) => {
+        geocode(cityInput, mapboxToken).then(function(result) {
+            cityLat = result[1];
+            cityLon = result[0];
+        });
+    }
+
 
    let convertWindSpeed = (currentWind) => {
        return (currentWind / 0.44704).toFixed(2);
@@ -30,17 +46,7 @@ $(document).ready(function() {
            return arr[(val % 16)];
    }
 
-    let getCoords = (cityInput) => {
-        geocode(cityInput, mapboxToken).then(function(result) {
-            cityLat = result[1];
-            cityLon = result[0];
-        });
-    }
-
    var weatherTemplateBuilder = function() {
-       $('li').removeClass('active');
-       $(this).toggleClass('active');
-       // $('#citySearchText').val("");
        var cardTemplate = `
             <div id="weather-cards" class="container-fluid row justify-content-center mt-5">
             </div>
@@ -53,7 +59,6 @@ $(document).ready(function() {
    }
 
    var currentWeatherBuilder = function(obj) {
-
        var entryHTML ='';
        var iconUrl = "http://openweathermap.org/img/w/" + obj.weather[0].icon + ".png";
        entryHTML += `
@@ -80,11 +85,11 @@ $(document).ready(function() {
 
     var weeklyWeatherBuilder = function(objArr) {
         var entryHTML ='';
-        objArr.daily.forEach((obj) => {
+        objArr.daily.forEach((obj, index) => {
         var iconUrl = "http://openweathermap.org/img/w/" + obj.weather[0].icon + ".png";
         entryHTML += `
             <div class="card justify-content-center mt-2">
-                <div class="card-header text-center">${getDate()}</div>
+                <div class="card-header text-center">${getDate(index)}</div>
                 <div class="card-body">     
                         <p class="mb-0">Low: <strong>${obj.temp.min} °F</strong> / High: <strong>${obj.temp.max} °F</strong></p>
                         <div class="weather-icon"><img src="${iconUrl}"></div>   
@@ -104,22 +109,26 @@ $(document).ready(function() {
     }
 
    function getCurrentWeather(city){
-    $.get("http://api.openweathermap.org/data/2.5/weather", {
-    	APPID: OPEN_WEATHER_APPID,
-    	q: `${city}, US`,
-        units: "imperial"
-    }).done(function (data) {
-    	console.log(data);
-    	$('#weather-cards').html(currentWeatherBuilder(data));
-    	$('.currentCity').html("<strong>"+"Current City: "+"</strong>" + city).css("text-transform", "capitalize");
-    }).fail(function () {
-        $('#weather-cards').html("<p>Sorry, couldn't find that city.</p>");
-        $('.currentCity').html("<strong>"+"Current City: "+"</strong>" + city);
-    });
+        $.get("http://api.openweathermap.org/data/2.5/weather", {
+            APPID: OPEN_WEATHER_APPID,
+            q: `${city}, US`,
+            units: "imperial"
+        }).done(function (data) {
+            console.log(data);
+            $('#weather-cards').html(currentWeatherBuilder(data));
+            $('.currentCity').html("<strong>"+"Current City: "+"</strong>" + city).css("text-transform", "capitalize");
+        }).fail(function () {
+            $('#weather-cards').html("<p>Sorry, couldn't find that city.</p>");
+            $('.currentCity').html("<strong>"+"Current City: "+"</strong>" + city);
+        });
    }
 
     function getWeeklyWeather(city){
-        getCoords(city);
+       Promise.resolve(geocode(city, mapboxToken))
+           .then(function(result) {
+           cityLat = result[1];
+           cityLon = result[0];
+       }).then(function() {
         $.get("https://api.openweathermap.org/data/2.5/onecall", {
             appid: OPEN_WEATHER_APPID,
             lat: cityLat,
@@ -132,12 +141,12 @@ $(document).ready(function() {
         }).fail(function () {
             $('#weather-cards').html("<p>Sorry, couldn't find that city.</p>");
             $('.currentCity').html("<strong>"+"Current City: "+"</strong>" + city);
-        });
+        })});
     }
 
    $('#searchBtn').on('click', function(e) {
        e.preventDefault();
-       cityInput = $('#citySearchText').val();
+       cityInput =  cityInput == "" ? $('#citySearchText').val() : cityInput;
        if (cityInput.trim() === "") {return}
        if ($('#currentWeather').hasClass('active')) {
            getCurrentWeather(cityInput);
@@ -162,10 +171,28 @@ $(document).ready(function() {
         }
     });
 
-    $('#currentWeather').on("click", weatherTemplateBuilder);
-    $('#weeklyWeather').on("click", weatherTemplateBuilder);
+   function combineDaily() {
+       $('li').removeClass('active');
+       $(this).toggleClass('active');
+       weatherTemplateBuilder();
+       if (cityInput != "") {
+        getCurrentWeather(cityInput);
+       }
+   }
+
+   function combineWeekly() {
+       $('li').removeClass('active');
+       $(this).toggleClass('active');
+       weatherTemplateBuilder();
+       if (cityInput != "") {
+           getWeeklyWeather(cityInput);
+       }
+   }
+
+    $('#currentWeather').on("click", combineDaily);
+    $('#weeklyWeather').on("click", combineWeekly);
 
     // getCurrentWeather("San Antonio");
-    getCoords("San Antonio");
+    // getCoords("San Antonio");
 
 });
