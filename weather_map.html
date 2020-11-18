@@ -21,24 +21,17 @@
             text-align-last: center;
 
         }
-        img {
-            /*float: left;*/
-            /*max-width: 150px;*/
-            /*max-height: 150px;*/
-            /*margin: 20px;*/
-            /*align: center;*/
-        }
     </style>
 </head>
     <body>
     <div class="container-fluid">
         <div class="jumbotron display-4 text-center" style="background-color: lightblue">SimpliWeather</div>
         <div>
-            <ul class="nav justify-content-center">
+            <ul id="weatherNav" class="nav justify-content-center mb-4">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Current Weather (Single City)</a>
+                    <a id="currentWeather" class="nav-link" href="#">Current Weather (Single City)</a>
                 </li>
-                <li class="nav-item">
+                <li id="weeklyWeather" class="nav-item">
                     <a class="nav-link" href="#">Weekly Forecast (Single City)</a>
                 </li>
                 <li class="nav-item">
@@ -49,23 +42,13 @@
                 </li>
             </ul>
         </div>
-        <div class="row">
+        <div id="weatherRow" class="row">
             <div class="col-6">
-                <input id="citySearchText" type="text"><button id="searchBtn" type="submit">SEARCH</button>
+                <input id="citySearchText" type="text"><button id="searchBtn" type="submit" style="background-color: lightblue">SEARCH</button>
             </div>
-                <div class="currentCity col-6" style="text-align: right"><strong>Current City:</strong></div>
+                <div id="currentCityText" class="currentCity col-6" style="text-align: right"><strong>Current City:</strong></div>
         </div>
-        <div id="weather-cards" class="container-fluid row">
-            <div class="card">
-                <div class="card-header">Loading Date</div>
-                <div class="card-body">
-                    <blockquote class="blockquote mb-0">
-                        <p>Loading Weather</p>
-                        <br>
-
-                    </blockquote>
-                </div>
-            </div>
+        <div id="weather-cards" class="container-fluid row justify-content-center mt-5">
         </div>
         <br>
         <br>

@@ -1,15 +1,15 @@
 $(document).ready(function() {
    "use strict";
 
-   //human readable date
+    let cityInput = "";
+
    let getDate = () => {
        var today = new Date();
        var dd = String(today.getDate()).padStart(2, '0');
        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
        var yyyy = today.getFullYear();
-
-       today = yyyy + '-' + mm + "-" + dd;
-      return today;
+       var todayFormat = yyyy + '-' + mm + "-" + dd;
+      return todayFormat;
    }
 
    let convertWindSpeed = (currentWind) => {
@@ -23,31 +23,41 @@ $(document).ready(function() {
            return arr[(val % 16)];
    }
 
+   var weatherTemplateBuilder = function() {
+       $('#citySearchText').val("");
+       var cardTemplate = `
+            <div id="weather-cards" class="container-fluid row justify-content-center mt-5">
+            </div>
+            <div><h1></h1></div>
+        `;
+       $('#weather-cards').remove();
+       $('#currentCityText').html('Current City:');
+       $('#weatherRow').append(cardTemplate);
+   }
 
-
-    var blogEntryBuilder = function(obj) {
-        var entryHTML ='';
-        var iconUrl = "http://openweathermap.org/img/w/" + obj.weather[0].icon + ".png";
-            entryHTML += `
-                    <div class="card mt-2">
-                        <div class="card-header">Today's Date: ${getDate()}</div>
-                        <div class="card-body">
-                                <p class="mb-0">Current Temperature: <strong>${Math.ceil(obj.main.temp)} °F</strong></p>
-                                <div class="weather-icon"><img src="${iconUrl}"></div>   
-                                <div>                             
-                                    <p>Low: <strong>${obj.main.temp_min} °F</strong> / High: <strong>${obj.main.temp_max} °F</strong></p>
-                                    <p> Description: <strong>${obj.weather[0].description}</strong></p>
-                                    <p> Humidity: <strong>${obj.main.humidity}%</strong></p>
-                                    <p> Wind Speed: <strong>${convertWindSpeed(obj.wind.speed)} MPH</strong></p>
-                                    <p> Wind Direction: <strong>${obj.wind.direction?.code || convertDegtoCardinal(obj.wind.deg)}</strong></p>
-                                    <p> Pressure: <strong>${obj.main.pressure} hPa</strong></p>
-                                </div>
+   var currentWeatherBuilder = function(obj) {
+       var entryHTML ='';
+       var iconUrl = "http://openweathermap.org/img/w/" + obj.weather[0].icon + ".png";
+       entryHTML += `
+            <div class="card justify-content-center mt-2">
+                <div class="card-header">Today's Date: ${getDate()}</div>
+                <div class="card-body">
+                        <p class="mb-0">Current Temperature: <strong>${Math.ceil(obj.main.temp)} °F</strong></p>
+                        <p class="mb-0 text-center">(Feels Like: <strong>${Math.ceil(obj.main.feels_like)} °F)</strong></p>
+                        <div class="weather-icon"><img src="${iconUrl}"></div>   
+                        <div>                             
+                            <p>Low: <strong>${obj.main.temp_min} °F</strong> / High: <strong>${obj.main.temp_max} °F</strong></p>
+                            <p>Description: <strong>${obj.weather[0].description}</strong></p>
+                            <p>Humidity: <strong>${obj.main.humidity}%</strong></p>
+                            <p>Wind Speed: <strong>${convertWindSpeed(obj.wind.speed)} mph</strong></p>
+                            <p>Wind Direction: <strong>${obj.wind.direction?.code || convertDegtoCardinal(obj.wind.deg)}</strong></p>
+                            <p>Pressure: <strong>${obj.main.pressure} hPa</strong></p>
                         </div>
-                    </div>
-                    <br>
-                    <br>
-            `
-        return entryHTML;
+                </div>
+            </div>
+            <br>
+            <br>`
+       return entryHTML;
     }
 
    function getCurrentWeather(city){
@@ -57,10 +67,12 @@ $(document).ready(function() {
         units: "imperial"
     }).done(function (data) {
     	console.log(data);
-    	$('#weather-cards').html(blogEntryBuilder(data));
+    	let cityNameFormatted = $(city).css("text-transform", "uppercase");
+    	$('#weather-cards').html(currentWeatherBuilder(data));
     	$('.currentCity').html("<strong>"+"Current City: "+"</strong>" + city)
     }).fail(function () {
-
+        $('#weather-cards').html("<p>Sorry, couldn't find that city.</p>");
+        $('.currentCity').html("<strong>"+"Current City: "+"</strong>" + city);
     });
    }
 
@@ -69,9 +81,8 @@ $(document).ready(function() {
    $('#searchBtn').on('click', function(e) {
        e.preventDefault();
        //user city input
-       let cityInput = $('#citySearchText').val();
-       if (cityInput.trim() == "") {return}
-       console.log(cityInput);
+       cityInput = $('#citySearchText').val();
+       if (cityInput.trim() === "") {return}
        getCurrentWeather(cityInput);
     }
    )
@@ -87,6 +98,7 @@ $(document).ready(function() {
         }
     });
 
+    $('#currentWeather').on("click", weatherTemplateBuilder);
 
 
 });
