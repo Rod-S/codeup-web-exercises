@@ -67,9 +67,8 @@ $(document).ready(function() {
         units: "imperial"
     }).done(function (data) {
     	console.log(data);
-    	let cityNameFormatted = $(city).css("text-transform", "uppercase");
     	$('#weather-cards').html(currentWeatherBuilder(data));
-    	$('.currentCity').html("<strong>"+"Current City: "+"</strong>" + city)
+    	$('.currentCity').html("<strong>"+"Current City: "+"</strong>" + city).css("text-transform", "capitalize");
     }).fail(function () {
         $('#weather-cards').html("<p>Sorry, couldn't find that city.</p>");
         $('.currentCity').html("<strong>"+"Current City: "+"</strong>" + city);
