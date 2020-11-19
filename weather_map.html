@@ -19,7 +19,14 @@
     <style>
         .weather-icon {
             text-align-last: center;
-
+        }
+        .active {
+            background-color: lightblue;
+        }
+        #map {
+            /* the width and height may be set to any size */
+            width: 100%;
+            height: 300px;
         }
     </style>
 </head>
@@ -37,20 +44,23 @@
             </ul>
         </div>
         <div id="weatherRow" class="row">
-            <div class="col-6">
+            <div class="col-6 flex justify-content-center">
                 <input id="citySearchText" type="text" placeholder="Search a city...">
                 <button id="searchBtn" type="submit" style="background-color: lightblue">SEARCH</button>
                 <button id="clearBtn" type="submit" style="background-color: lightblue">CLEAR</button>
             </div>
                 <div id="currentCityText" class="currentCity col-6" style="text-align: right"><strong>Current City:</strong></div>
+            <div id="weather-cards-h1" class="mx-auto"><h3><u>DAILY FORECAST</u></h3></div>
+            <div id="weather-cards" class="container-fluid row justify-content-center mt-1">
+            </div>
         </div>
-        <div id="weather-cards" class="container-fluid row justify-content-center mt-5">
-        </div>
+        <div id='map' class="mt-1"></div>
         <br>
         <br>
     </div>
-        <script src="js/keys.js"></script>
-        <script src="js/mapbox-geocoder-utils.js"></script>
-        <script src="js/weather_map.js"></script>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
+    <script src="js/keys.js"></script>
+    <script src="js/mapbox-geocoder-utils.js"></script>
+    <script src="js/weather_map.js"></script>
     </body>
 </html>

@@ -46,21 +46,23 @@ $(document).ready(function() {
            return arr[(val % 16)];
    }
 
-   var weatherTemplateBuilder = function() {
-       var cardTemplate = `
-            <div id="weather-cards" class="container-fluid row justify-content-center mt-5">
-            </div>
-            <div id="weather-cards-h1"><h1></h1></div>
-        `;
+   var weatherTemplateBuilder = function(daily, weekly) {
+       var cardTemplate = `<div id="weather-cards" class="container-fluid row justify-content-center mt-1"></div>`;
+       if (daily) {
+           var cardPrepend = `<div id="weather-cards-h1" class="mx-auto"><h3><u>DAILY FORECAST</u></h3></div>`
+       } else if (weekly) {
+           var cardPrepend = `<div id="weather-cards-h1" class="mx-auto"><h3><u>WEEKLY FORECAST</u></h3></div>`
+       }
        $('#weather-cards').remove();
        $('#weather-cards-h1').remove();
-       $('#currentCityText').html('Current City:');
+       $('#currentCityText').html(`<strong>Current City:</strong> ${cityInput}`);
+       $('#weatherRow').append(cardPrepend);
        $('#weatherRow').append(cardTemplate);
    }
 
-   var currentWeatherBuilder = function(obj) {
+   var dailyWeatherBuilder = function(obj) {
        var entryHTML ='';
-       var iconUrl = "http://openweathermap.org/img/w/" + obj.weather[0].icon + ".png";
+       var iconUrl = "http://openweathermap.org/img/wn/" + obj.weather[0].icon + "@2x.png";
        entryHTML += `
             <div class="card justify-content-center mt-2">
                 <div class="card-header text-center">Today's Date: ${getDate()}</div>
@@ -69,7 +71,7 @@ $(document).ready(function() {
                         <p class="mb-0 text-center">(Feels Like: <strong>${Math.ceil(obj.main.feels_like)} °F)</strong></p>
                         <div class="weather-icon"><img src="${iconUrl}"></div>   
                         <div>                             
-                            <p>Low: <strong>${obj.main.temp_min} °F</strong> / High: <strong>${obj.main.temp_max} °F</strong></p>
+                            <p>High: <strong>${obj.main.temp_max} °F</strong> / Low: <strong>${obj.main.temp_min} °F</strong></p>
                             <p>Description: <strong>${obj.weather[0].description}</strong></p>
                             <p>Humidity: <strong>${obj.main.humidity}%</strong></p>
                             <p>Wind Speed: <strong>${convertWindSpeed(obj.wind.speed)} mph</strong></p>
@@ -86,38 +88,39 @@ $(document).ready(function() {
     var weeklyWeatherBuilder = function(objArr) {
         var entryHTML ='';
         objArr.daily.forEach((obj, index) => {
-        var iconUrl = "http://openweathermap.org/img/w/" + obj.weather[0].icon + ".png";
-        entryHTML += `
-            <div class="card justify-content-center mt-2">
-                <div class="card-header text-center">${getDate(index)}</div>
-                <div class="card-body">     
-                        <p class="mb-0">Low: <strong>${obj.temp.min} °F</strong> / High: <strong>${obj.temp.max} °F</strong></p>
-                        <div class="weather-icon"><img src="${iconUrl}"></div>   
-                        <div>                             
-                            <p class="mb-0">Description: <strong>${obj.weather[0].description}</strong></p>
-                            <p class="mb-0">Humidity: <strong>${obj.humidity}%</strong></p>
-                            <p class="mb-0">Wind Speed: <strong>${convertWindSpeed(obj.wind_speed)} mph</strong></p>
-                            <p class="mb-0">Wind Direction: <strong>${convertDegtoCardinal(obj.wind_deg)}</strong></p>
-                            <p class="mb-0">Pressure: <strong>${obj.pressure} hPa</strong></p>
-                        </div>
+            if (index >= objArr.daily.length -3) return entryHTML;
+            var iconUrl = "http://openweathermap.org/img/wn/" + obj.weather[0].icon + "@2x.png";
+            entryHTML += `
+                <div class="card justify-content-center mt-2">
+                    <div class="card-header text-center">${getDate(index)}</div>
+                    <div class="card-body">     
+                            <p class="mb-0">High: <strong>${obj.temp.max} °F</strong> / Low: <strong>${obj.temp.min} °F</strong></p>
+                            <div class="weather-icon"><img src="${iconUrl}"></div>   
+                            <div>                             
+                                <p class="mb-0">Description: <strong>${obj.weather[0].description}</strong></p>
+                                <p class="mb-0">Humidity: <strong>${obj.humidity}%</strong></p>
+                                <p class="mb-0">Wind Speed: <strong>${convertWindSpeed(obj.wind_speed)} mph</strong></p>
+                                <p class="mb-0">Wind Direction: <strong>${convertDegtoCardinal(obj.wind_deg)}</strong></p>
+                                <p class="mb-0">Pressure: <strong>${obj.pressure} hPa</strong></p>
+                            </div>
+                    </div>
                 </div>
-            </div>
-            <br>
-            <br>`
-        })
+                <br>
+                <br>`
+            })
         return entryHTML;
     }
 
-   function getCurrentWeather(city){
+   function getDailyWeather(city){
         $.get("http://api.openweathermap.org/data/2.5/weather", {
             APPID: OPEN_WEATHER_APPID,
             q: `${city}, US`,
             units: "imperial"
         }).done(function (data) {
             console.log(data);
-            $('#weather-cards').html(currentWeatherBuilder(data));
+            $('#weather-cards').html(dailyWeatherBuilder(data));
             $('.currentCity').html("<strong>"+"Current City: "+"</strong>" + city).css("text-transform", "capitalize");
-        }).fail(function () {
+        }).fail(function (data) {
             $('#weather-cards').html("<p>Sorry, couldn't find that city.</p>");
             $('.currentCity').html("<strong>"+"Current City: "+"</strong>" + city);
         });
@@ -144,17 +147,59 @@ $(document).ready(function() {
         })});
     }
 
-   $('#searchBtn').on('click', function(e) {
-       e.preventDefault();
-       cityInput =  cityInput == "" ? $('#citySearchText').val() : cityInput;
-       if (cityInput.trim() === "") {return}
-       if ($('#currentWeather').hasClass('active')) {
-           getCurrentWeather(cityInput);
-       } else {
+   function combineDaily() {
+       $('li').removeClass('active');
+       $(this).toggleClass('active');
+       weatherTemplateBuilder(true, null);
+       if (cityInput != "") {
+           getDailyWeather(cityInput);
+       }
+   }
+
+   function combineWeekly() {
+       $('li').removeClass('active');
+       $(this).toggleClass('active');
+       weatherTemplateBuilder(null, true);
+       if (cityInput != "") {
            getWeeklyWeather(cityInput);
        }
+   }
+
+   ///////////////////
+    //MAPBOX FNs//////
+   ///////////////////
+    mapboxgl.accessToken = mapboxToken;
+
+    var mapboxOptions = {
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v9',
+        zoom: 20,
     }
-   )
+    var map = new mapboxgl.Map(mapboxOptions);
+    geocode("800 Town and Country Blvd, Houston, TX 77024", mapboxToken).then(function(result) {
+        console.log(result);
+        map.setCenter(result);
+        map.setZoom(18);
+    });
+
+    ///////////////////
+    //EVENT HANDLERS//
+    //////////////////
+    $('#currentWeather').on("click", combineDaily);
+    $('#weeklyWeather').on("click", combineWeekly);
+
+    $('#searchBtn').on('click', function(e) {
+            e.preventDefault();
+            // cityInput =  cityInput == "" ? $('#citySearchText').val() : cityInput;
+        cityInput = $('#citySearchText').val();
+            if (cityInput.trim() === "") {return}
+            if ($('#currentWeather').hasClass('active')) {
+                getDailyWeather(cityInput);
+            } else {
+                getWeeklyWeather(cityInput);
+            }
+        }
+    )
     $('#clearBtn').on('click', function(e) {
         e.preventDefault();
         cityInput = $('#citySearchText').val('');
@@ -171,28 +216,8 @@ $(document).ready(function() {
         }
     });
 
-   function combineDaily() {
-       $('li').removeClass('active');
-       $(this).toggleClass('active');
-       weatherTemplateBuilder();
-       if (cityInput != "") {
-        getCurrentWeather(cityInput);
-       }
-   }
 
-   function combineWeekly() {
-       $('li').removeClass('active');
-       $(this).toggleClass('active');
-       weatherTemplateBuilder();
-       if (cityInput != "") {
-           getWeeklyWeather(cityInput);
-       }
-   }
-
-    $('#currentWeather').on("click", combineDaily);
-    $('#weeklyWeather').on("click", combineWeekly);
-
-    // getCurrentWeather("San Antonio");
+    // getDailyWeather("San Antonio");
     // getCoords("San Antonio");
 
 });
