@@ -112,18 +112,26 @@ $(document).ready(function() {
     }
 
    function getDailyWeather(city){
-        $.get("http://api.openweathermap.org/data/2.5/weather", {
-            APPID: OPEN_WEATHER_APPID,
-            q: `${city}, US`,
-            units: "imperial"
-        }).done(function (data) {
-            console.log(data);
-            $('#weather-cards').html(dailyWeatherBuilder(data));
-            $('.currentCity').html("<strong>"+"Current City: "+"</strong>" + city).css("text-transform", "capitalize");
-        }).fail(function (data) {
-            $('#weather-cards').html("<p>Sorry, couldn't find that city.</p>");
-            $('.currentCity').html("<strong>"+"Current City: "+"</strong>" + city);
-        });
+       Promise.resolve(geocode(city, mapboxToken))
+           .then(function(result) {
+           cityLat = result[1];
+           cityLon = result[0];
+           map.setCenter(result);
+           map.setZoom(10);
+           $('#map').show();
+           }).then(function() {
+           $.get("http://api.openweathermap.org/data/2.5/weather", {
+           APPID: OPEN_WEATHER_APPID,
+           q: `${city}, US`,
+           units: "imperial"
+       }).done(function (data) {
+           console.log(data);
+           $('#weather-cards').html(dailyWeatherBuilder(data));
+           $('.currentCity').html("<strong>"+"Current City: "+"</strong>" + city).css("text-transform", "capitalize");
+       }).fail(function (data) {
+           $('#weather-cards').html("<p>Sorry, couldn't find that city.</p>");
+           $('.currentCity').html("<strong>"+"Current City: "+"</strong>" + city);
+       })});
    }
 
     function getWeeklyWeather(city){
@@ -131,6 +139,10 @@ $(document).ready(function() {
            .then(function(result) {
            cityLat = result[1];
            cityLon = result[0];
+           map.setCenter(result);
+           map.setZoom(10);
+           mapMarker.setLngLat(result).addTo(map);
+           $('#map').show();
        }).then(function() {
         $.get("https://api.openweathermap.org/data/2.5/onecall", {
             appid: OPEN_WEATHER_APPID,
@@ -176,11 +188,18 @@ $(document).ready(function() {
         zoom: 20,
     }
     var map = new mapboxgl.Map(mapboxOptions);
-    geocode("800 Town and Country Blvd, Houston, TX 77024", mapboxToken).then(function(result) {
-        console.log(result);
-        map.setCenter(result);
-        map.setZoom(18);
+    var mapMarker = new mapboxgl.Marker({
+        draggable: true
     });
+
+    function onDragEnd() {
+        var lngLat = mapMarker.getLngLat();
+        cityLat = lngLat.lat
+        cityLon = lngLat.lng
+        console.log("cityLat "+cityLat);
+        console.log("cityLon " +cityLon);
+    }
+    mapMarker.on('dragend', onDragEnd);
 
     ///////////////////
     //EVENT HANDLERS//
@@ -205,19 +224,13 @@ $(document).ready(function() {
         cityInput = $('#citySearchText').val('');
     })
 
-    // Execute a function when the user releases a key on the keyboard
     $('#citySearchText').on("keyup", function(event) {
-        // Number 13 is the "Enter" key on the keyboard
         if (event.keyCode === 13) {
-            // Cancel the default action, if needed
             event.preventDefault();
-            // Trigger the button element with a click
             $('#searchBtn').click();
         }
     });
 
-
-    // getDailyWeather("San Antonio");
-    // getCoords("San Antonio");
+    $('#map').hide();
 
 });
