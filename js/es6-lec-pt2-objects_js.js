@@ -9,8 +9,8 @@
 // let age = 3;
 // let dogName = "Lexie";
 // let isCute = true;
-//
-// //old way
+
+//old way
 // let oldDog = {
 // 	breed: breed,
 // 	age: age,
@@ -26,9 +26,15 @@
 
 
 // //new way
+//
+// let newDog = {
+// 	breed,
+// 	age,
+// 	dogName,
+// 	isCute
+// }
 
-
-
+// console.log(newDog);
 
 
 
@@ -40,24 +46,24 @@
  *          Based on the name of the key
  *****************************************************************/
 
-// var person = {
-// 	name: 'codeup',
-// 	age: 4
-// };
+var personA = {
+	name: 'codeup',
+	age: 4
+};
 
 // old way
 //
-// var name = person.name;
-// var age = person.age;
+// var name = personA.name;
+// var age = personA.age;
 //
-//
-// console.log(name); // 'codeup'
-// console.log(age); // 4
+// //
+// // console.log(name); // 'codeup'
+// // console.log(age); // 4
 
 
 //TODO TOGETHER: REFACTOR the above approach using ES6
 
-
+// const {name, age} = personA;
 
 
 
@@ -85,7 +91,9 @@ const pals = {
 //TODO TOGETHER: REFACTOR the above approach using ES6
 //new way
 
+const {dog, cat, mouse} = pals;
 
+console.log(dog, cat, mouse)
 
 
 
@@ -141,8 +149,11 @@ const alphabet = ['A', 'B', 'C', 'D', 'E'];
 
 //TODO TOGETHER: new way
 
+[a, b, , ,d ,] = alphabet
 
-
+console.log(a);
+console.log(b);
+console.log(d)
 
 
 //TODO TOGETHER: To skip an element...
@@ -153,8 +164,8 @@ const alphabet = ['A', 'B', 'C', 'D', 'E'];
 
 //TODO TOGETHER: To get all elements...Spread operator *BONUS
 
-
-
+// [a,b,c, ...rest]
+//console.log(rest) => array of rest of nonspecified elements
 
 
 /*==============================================*/
