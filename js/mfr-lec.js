@@ -16,9 +16,15 @@ const numbers = [1,2,3,4,5,6,7,8,9,10];
 
 
 // TODO TOGETHER: Let's map through the array of numbers and add 1 to each element. Console log the new copy of the array.
+let newArray = numbers.map(element => element + 1)
 
+console.log(newArray);
 
 //TODO: Map through the new array of numbers and this time multiply each element by 3. Console log the new copy.
+
+let newArray2 = newArray.map(element => element * 3)
+
+console.log(newArray2);
 
 //Bonus: Refactor your functions using ES6
 
@@ -30,7 +36,12 @@ const binary = [1,1,1,1,0,0,1,1,1,1];
 
 // TODO TOGETHER: Let's filter through our binary and return all the true values. We'll store the new array in a variable named 'ones'
 
+let filteredBinary = binary.filter(e => e)
+console.log(filteredBinary);
 // TODO: filter through binary again and this time, return all the false values.
+
+let filteredBinary2 = binary.filter(e => !e)
+console.log(filteredBinary2);
 
 //Bonus: Refactor your functions using ES6
 
@@ -64,9 +75,12 @@ const fruitsAndVeggies = [
 
 // TODO: filter through the array of objects and return all fruit type objects.
 
+let fruitArray = fruitsAndVeggies.filter(obj => obj.type === 'fruit');
+console.log(fruitArray);
 
 // TODO: filter through the array of objects and return all vegetable type objects.
-
+let veggieArray = fruitsAndVeggies.filter(obj => obj.type === 'vegetable');
+console.log(veggieArray);
 
 /*********************************************
  *              .reduce
@@ -88,10 +102,18 @@ const numbersArray = [1, 2, 3, 4, 5];
 
 // final accumulation = 15
 
+var sum = numbersArray.reduce((currentSum, currentNumber) => {
+   return currentSum + currentNumber;
+},0)
 
+console.log(sum);
 // TODO TOGETHER: Let's reduce our original numbers Array into one single value.
 
 // TODO: Using .reduce, subtract all numbers in the numbers Array from a starting point of 100.
+
+const diff = numbersArray.reduce((currentDifference, shoppingCart) => currentDifference - shoppingCart,100);
+
+console.log(diff);
 
 const shoppingCarts = [
     {
@@ -119,15 +141,60 @@ const shoppingCarts = [
 
 // TODO: Using .reduce, return the total number of apples.
 
+let apples = shoppingCarts.reduce((currentValue, cart) => currentValue + cart.apples,0);
+console.log(apples);
+
+let totalFruits = shoppingCarts.reduce((currentTotal,cart) => {
+    let apples = cart.apples;
+    let bananas = cart.bananas;
+    let oranges = cart.oranges;
+    let grapes = cart.grapes;
+    debugger
+    if (currentTotal['apples'] === 'undefined') {
+        currentTotal['apples'] = apples
+    } else {
+        currentTotal['apples'] += apples
+    } if (currentTotal['bananas'] === 'undefined') {
+        currentTotal['bananas'] = bananas
+    } else {
+        currentTotal['bananas'] += bananas
+    } if (currentTotal['oranges'] === 'undefined') {
+        currentTotal['oranges'] = oranges
+    } else {
+        currentTotal['oranges'] += oranges
+    } if (currentTotal['grapes'] === 'undefined') {
+        currentTotal['grapes'] = grapes
+    } else {
+        currentTotal['grapes'] += grapes
+    }
+    return currentTotal;
+},{})
+
+console.log(totalFruits);
 
 const colors = ['red','orange','red','blue','blue','green','red'];
 
 // TODO: Count the number of times a color appears in this Array. Hint: your initial value should be an empty object.
 
+let colorCount = colors.reduce((colorCount, color) => {
+    debugger
+    if (typeof colorCount[color] === "undefined") {
+        colorCount[color] = 1;
+    } else {
+        colorCount[color] +=1;
+    }
+    return colorCount;
+    },{})
+
+console.log(colorCount);
 
 const lyrics = ['we','all','live','in','a','yellow','submarine'];
 
 //TODO TOGETHER: Using reduce, let's turn this into a string.
+
+let lyricsSum = lyrics.reduce((acc, lyric) => acc + lyric + " ","")
+
+console.log(lyricsSum)
 
 // Bonus: Create an Array of all the unique fur colors! Hint: check out the ES6 'Set' data type.
 
