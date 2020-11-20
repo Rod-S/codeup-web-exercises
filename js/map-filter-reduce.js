@@ -73,4 +73,10 @@ let usernameConcatString = users.reduce((currentTotal, user) => {
 },"")
 console.log(usernameConcatString);
 
-let uni
+let uniqueLanguageList = users.reduce((totalUniqueLanguages,user) => {
+    user.languages.forEach((language) =>
+        totalUniqueLanguages.includes(language) ? totalUniqueLanguages : totalUniqueLanguages.push(language))
+    return totalUniqueLanguages
+},[]);
+
+console.log(uniqueLanguageList);
