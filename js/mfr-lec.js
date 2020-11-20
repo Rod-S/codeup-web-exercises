@@ -144,40 +144,20 @@ const shoppingCarts = [
 let apples = shoppingCarts.reduce((currentValue, cart) => currentValue + cart.apples,0);
 console.log(apples);
 
-let totalFruits = shoppingCarts.reduce((currentTotal,cart) => {
-    let apples = cart.apples;
-    let bananas = cart.bananas;
-    let oranges = cart.oranges;
-    let grapes = cart.grapes;
-    debugger
-    if (currentTotal['apples'] === 'undefined') {
-        currentTotal['apples'] = apples
-    } else {
-        currentTotal['apples'] += apples
-    } if (currentTotal['bananas'] === 'undefined') {
-        currentTotal['bananas'] = bananas
-    } else {
-        currentTotal['bananas'] += bananas
-    } if (currentTotal['oranges'] === 'undefined') {
-        currentTotal['oranges'] = oranges
-    } else {
-        currentTotal['oranges'] += oranges
-    } if (currentTotal['grapes'] === 'undefined') {
-        currentTotal['grapes'] = grapes
-    } else {
-        currentTotal['grapes'] += grapes
-    }
-    return currentTotal;
-},{})
+const totalFruit = shoppingCarts.reduce(function(eachFruit,cart){
+    Object.keys(cart).forEach(function (key){
+        eachFruit[key] = (eachFruit[key] || 0) + cart[key];
+    });
+    return eachFruit;
+},{});
 
-console.log(totalFruits);
+console.log(totalFruit);
 
 const colors = ['red','orange','red','blue','blue','green','red'];
 
 // TODO: Count the number of times a color appears in this Array. Hint: your initial value should be an empty object.
 
 let colorCount = colors.reduce((colorCount, color) => {
-    debugger
     if (typeof colorCount[color] === "undefined") {
         colorCount[color] = 1;
     } else {
@@ -231,3 +211,10 @@ var hamsters = [
         dateOfBirth: "January 14"
     }
 ];
+
+let hamsterColors = hamsters.map(hamster => hamster.fur).flat();
+console.log(hamsterColors);
+
+let uniqueHamsterColors = hamsterColors.reduce((uniqueArray, hamsterColor) =>
+    uniqueArray.includes(hamsterColor) ? uniqueArray : [...uniqueArray, hamsterColor], [])
+console.log(uniqueHamsterColors);
