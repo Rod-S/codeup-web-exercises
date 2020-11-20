@@ -5,7 +5,7 @@ $(document).ready(function() {
     let cityLat;
     let cityLon;
 
-   let getDate = (addDay) => {
+   const getDate = addDay => {
        if (addDay >= 0) {
            var today = new Date();
            today.setDate(today.getDate()+addDay)
@@ -27,7 +27,7 @@ $(document).ready(function() {
       return todayFormat;
    }
 
-    let getCoords = (cityInput) => {
+    const getCoords = cityInput => {
         geocode(cityInput, mapboxToken).then(function(result) {
             cityLat = result[1];
             cityLon = result[0];
@@ -35,18 +35,18 @@ $(document).ready(function() {
     }
 
 
-   let convertWindSpeed = (currentWind) => {
+   const convertWindSpeed = currentWind => {
        return (currentWind / 0.44704).toFixed(2);
    }
 
    //convert degrees to cardinal directions
-   let convertDegtoCardinal = (deg) => {
+   const convertDegtoCardinal = (deg) => {
            var val = Math.floor((deg / 22.5) + 0.5);
            var arr = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
            return arr[(val % 16)];
    }
 
-   var weatherTemplateBuilder = function(daily, weekly) {
+   const weatherTemplateBuilder = (daily, weekly) => {
        var cardTemplate = `<div id="weather-cards" class="container-fluid row justify-content-center mt-1"></div>`;
        if (daily) {
            var cardPrepend = `<div id="weather-cards-h1" class="mx-auto"><h3><u>DAILY FORECAST</u></h3></div>`
@@ -60,7 +60,7 @@ $(document).ready(function() {
        $('#weatherRow').append(cardTemplate);
    }
 
-   var dailyWeatherBuilder = function(obj) {
+   const dailyWeatherBuilder = obj => {
        var entryHTML ='';
        var iconUrl = "http://openweathermap.org/img/wn/" + obj.weather[0].icon + "@2x.png";
        entryHTML += `
@@ -85,7 +85,7 @@ $(document).ready(function() {
        return entryHTML;
     }
 
-    var weeklyWeatherBuilder = function(objArr) {
+    const weeklyWeatherBuilder = objArr => {
         var entryHTML ='';
         objArr.daily.forEach((obj, index) => {
             if (index >= objArr.daily.length -3) return entryHTML;
@@ -111,30 +111,40 @@ $(document).ready(function() {
         return entryHTML;
     }
 
-   function getDailyWeather(city){
+   const getDailyWeather = city => {
        Promise.resolve(geocode(city, mapboxToken))
-           .then(function(result) {
-           cityLat = result[1];
-           cityLon = result[0];
-           map.setCenter(result);
-           map.setZoom(10);
-           $('#map').show();
-           }).then(function() {
-           $.get("http://api.openweathermap.org/data/2.5/weather", {
-           APPID: OPEN_WEATHER_APPID,
-           q: `${city}, US`,
-           units: "imperial"
-       }).done(function (data) {
-           console.log(data);
-           $('#weather-cards').html(dailyWeatherBuilder(data));
-           $('.currentCity').html("<strong>"+"Current City: "+"</strong>" + city).css("text-transform", "capitalize");
-       }).fail(function (data) {
-           $('#weather-cards').html("<p>Sorry, couldn't find that city.</p>");
-           $('.currentCity').html("<strong>"+"Current City: "+"</strong>" + city);
+           .then(
+               //success
+               function(result) {
+                   if (result) {
+                       cityLat = result[1];
+                       cityLon = result[0];
+                       map.setCenter(result);
+                       map.setZoom(10);
+                   }
+                   $('#map').show();
+               //fail
+               }, function() {
+                   $('#weather-cards').html("<p>Sorry, couldn't find that city.</p>");
+                   $('.currentCity').html("<strong>"+"Current City: "+"</strong>" + city);
+           })
+           .then(function() {
+               $.get("http://api.openweathermap.org/data/2.5/weather", {
+               APPID: OPEN_WEATHER_APPID,
+               q: `${city}, US`,
+               units: "imperial"
+               })
+               .done(function (data) {
+                   console.log(data);
+                   $('#weather-cards').html(dailyWeatherBuilder(data));
+                   $('.currentCity').html("<strong>"+"Current City: "+"</strong>" + city).css("text-transform", "capitalize");
+           }).fail(function (data) {
+               $('#weather-cards').html("<p>Sorry, couldn't find that city.</p>");
+               $('.currentCity').html("<strong>"+"Current City: "+"</strong>" + city);
        })});
    }
 
-    function getWeeklyWeather(city){
+    const getWeeklyWeather = city => {
        Promise.resolve(geocode(city, mapboxToken))
            .then(function(result) {
            cityLat = result[1];
@@ -159,7 +169,7 @@ $(document).ready(function() {
         })});
     }
 
-   function combineDaily() {
+   const combineDaily = () => {
        $('li').removeClass('active');
        $(this).toggleClass('active');
        weatherTemplateBuilder(true, null);
@@ -168,7 +178,7 @@ $(document).ready(function() {
        }
    }
 
-   function combineWeekly() {
+   const combineWeekly = () =>{
        $('li').removeClass('active');
        $(this).toggleClass('active');
        weatherTemplateBuilder(null, true);
@@ -192,12 +202,23 @@ $(document).ready(function() {
         draggable: true
     });
 
-    function onDragEnd() {
+    const onDragEnd = () => {
         var lngLat = mapMarker.getLngLat();
         cityLat = lngLat.lat
         cityLon = lngLat.lng
         console.log("cityLat "+cityLat);
         console.log("cityLon " +cityLon);
+        reverseGeocode({lng: cityLon, lat: cityLat}, mapboxToken)
+            .then(
+            //success
+            function(result) {
+                getWeeklyWeather(result);
+                $('#map').show();
+            //fail
+            }, function() {
+                $('#weather-cards').html("<p>Sorry, couldn't find that city.</p>");
+                $('.currentCity').html("<strong>"+"Current City: "+"</strong>" + city);
+            })
     }
     mapMarker.on('dragend', onDragEnd);
 
