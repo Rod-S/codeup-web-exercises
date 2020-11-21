@@ -51,32 +51,46 @@ console.log(users3Lang);
 let userEmail = users.map(user => user.email);
 console.log(userEmail);
 
-let totalExp = users.reduce((currentValue, user) => {
-    currentValue += user.yearsOfExperience
-    return currentValue
-},0);
+let totalExp = users.reduce((currentValue, user) => currentValue += user.yearsOfExperience, 0);
 let totalExpAvg = totalExp / users.length;
 console.log(totalExp);
 console.log(totalExpAvg)
 
-let longestEmail = users.reduce((currentLongest, user) => {
-    if (user.email.length > currentLongest.length) {
-        currentLongest = user.email;
-    }
-    return currentLongest
-}, "")
+let longestEmail = users.reduce((currentLongest, user) =>
+    (user.email.length > currentLongest.length) ? currentLongest = user.email : currentLongest, "")
 console.log(longestEmail);
 
-let usernameConcatString = users.reduce((currentTotal, user) => {
-    currentTotal += user.name;
-    return currentTotal
-},"")
+let usernameConcatString = users.reduce((currentTotal, user) =>  currentTotal += user.name,"")
 console.log(usernameConcatString);
 
 let uniqueLanguageList = users.reduce((totalUniqueLanguages,user) => {
-    user.languages.forEach((language) =>
-        totalUniqueLanguages.includes(language) ? totalUniqueLanguages : totalUniqueLanguages.push(language))
+    user.languages.forEach(language =>
+        totalUniqueLanguages.includes(language) ? totalUniqueLanguages : totalUniqueLanguages.push(language)
+    )
     return totalUniqueLanguages
 },[]);
-
 console.log(uniqueLanguageList);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
