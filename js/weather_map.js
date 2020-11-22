@@ -186,7 +186,7 @@ $(document).ready(function() {
        $(this).toggleClass('active');
        weatherTemplateBuilder(null, true);
        if (cityInput != "") {
-           getWeeklyWeather(cityInput);
+           getWeeklyWeather(geoCity || cityInput);
        }
    }
 
@@ -216,10 +216,12 @@ $(document).ready(function() {
             .then(
             //success
             function(result) {
-                cityInput = result.split(', ')[1].trim();
+                geoCity = result;
+                cityInput = result.split(', ')
+                cityInput = cityInput[cityInput.length-3] + ", " +cityInput[cityInput.length-2]
                 var mapMarkerSearch = result.split(', ')[1].trim() + ", " + result.split(', ')[2].trim();
                if ($('#currentWeather').hasClass('active')) {
-                   getCurrentWeather(mapMarkerSearch);
+                   getCurrentWeather(cityInput);
                } else {
                    getWeeklyWeather(result);
                }
