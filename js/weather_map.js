@@ -120,13 +120,12 @@ $(document).ready(function() {
                    cityLat = result[1];
                    cityLon = result[0];
                    map.setCenter(result);
-                   map.setZoom(10);
+                   map.setZoom(8);
                    mapMarker.setLngLat(result).addTo(map);
                    $('#map').show();
                //fail
                }, function() {
                    $('#weather-cards').html("<p>Sorry, couldn't find that city.</p>");
-                   $('.currentCity').html("<strong>"+"Current City: "+"</strong>" + city);
            }).then(function() {
                $.get("http://api.openweathermap.org/data/2.5/weather", {
                    APPID: OPEN_WEATHER_APPID,
@@ -217,9 +216,10 @@ $(document).ready(function() {
             .then(
             //success
             function(result) {
-                cityInput = console.log(result.split(',')[1].trim())
+                cityInput = result.split(', ')[1].trim();
+                var mapMarkerSearch = result.split(', ')[1].trim() + ", " + result.split(', ')[2].trim();
                if ($('#currentWeather').hasClass('active')) {
-                   getCurrentWeather(result)
+                   getCurrentWeather(mapMarkerSearch);
                } else {
                    getWeeklyWeather(result);
                }
