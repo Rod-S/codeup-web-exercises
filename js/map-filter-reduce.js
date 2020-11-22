@@ -63,15 +63,13 @@ console.log(longestEmail);
 let usernameConcatString = users.reduce((currentTotal, user) =>  currentTotal += user.name,"")
 console.log(usernameConcatString);
 
-let uniqueLanguageList = users.reduce((totalUniqueLanguages,user) => {
+let uniqueLanguageList = users.reduce((totalUniqueLanguages, user) => {
     user.languages.forEach(language =>
-        totalUniqueLanguages.includes(language) ? totalUniqueLanguages : totalUniqueLanguages.push(language)
+        totalUniqueLanguages.includes(language) ? totalUniqueLanguages : totalUniqueLanguages = [...totalUniqueLanguages, language]
     )
     return totalUniqueLanguages
-},[]);
+}, []);
 console.log(uniqueLanguageList);
-
-
 
 
 
