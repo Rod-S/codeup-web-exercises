@@ -62,21 +62,21 @@ $(document).ready(function() {
 
    const dailyWeatherBuilder = obj => {
        var entryHTML ='';
-       var iconUrl = "http://openweathermap.org/img/wn/" + obj.weather[0].icon + "@2x.png";
+       var iconUrl = "http://openweathermap.org/img/wn/" + obj.current.weather[0].icon + "@2x.png";
        entryHTML += `
             <div class="card justify-content-center mt-2">
                 <div class="card-header text-center">Today's Date: ${getDate()}</div>
                 <div class="card-body">
-                        <p class="mb-0">Current Temperature: <strong>${Math.ceil(obj.main.temp)} °F</strong></p>
-                        <p class="mb-0 text-center">(Feels Like: <strong>${Math.ceil(obj.main.feels_like)} °F)</strong></p>
+                        <p class="mb-0">Current Temperature: <strong>${Math.ceil(obj.current.temp)} °F</strong></p>
+                        <p class="mb-0 text-center">(Feels Like: <strong>${Math.ceil(obj.current.feels_like)} °F)</strong></p>
                         <div class="weather-icon"><img src="${iconUrl}"></div>   
                         <div>                             
-                            <p>High: <strong>${obj.main.temp_max} °F</strong> / Low: <strong>${obj.main.temp_min} °F</strong></p>
-                            <p>Description: <strong>${obj.weather[0].description}</strong></p>
-                            <p>Humidity: <strong>${obj.main.humidity}%</strong></p>
-                            <p>Wind Speed: <strong>${convertWindSpeed(obj.wind.speed)} mph</strong></p>
-                            <p>Wind Direction: <strong>${obj.wind.direction?.code || convertDegtoCardinal(obj.wind.deg)}</strong></p>
-                            <p>Pressure: <strong>${obj.main.pressure} hPa</strong></p>
+                            <p>High: <strong>${obj.daily[0].temp.max} °F</strong> / Low: <strong>${obj.daily[0].temp.min} °F</strong></p>
+                            <p>Description: <strong>${obj.current.weather[0].description}</strong></p>
+                            <p>Humidity: <strong>${obj.current.humidity}%</strong></p>
+                            <p>Wind Speed: <strong>${convertWindSpeed(obj.current.wind_speed)} mph</strong></p>
+                            <p>Wind Direction: <strong>${obj.current.wind?.direction?.code || convertDegtoCardinal(obj.current.wind_deg)}</strong></p>
+                            <p>Pressure: <strong>${obj.current.pressure} hPa</strong></p>
                         </div>
                 </div>
             </div>
@@ -127,9 +127,10 @@ $(document).ready(function() {
                }, function() {
                    $('#weather-cards').html("<p>Sorry, couldn't find that city.</p>");
            }).then(function() {
-               $.get("http://api.openweathermap.org/data/2.5/weather", {
+               $.get("http://api.openweathermap.org/data/2.5/onecall", {
                    APPID: OPEN_WEATHER_APPID,
-                   q: `${city}, US`,
+                   lat: cityLat,
+                   lon: cityLon,
                    units: "imperial"
                }).done(function (data) {
                    console.log(data);
