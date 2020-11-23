@@ -299,6 +299,22 @@
     //
 
 
+    // fetch('https://swapi.dev/api/people/1').then(response => {
+    //     return response.json();
+    // }).then(({name, height, mass}) => console.log)
+    // .catch(console.log)
+
+    fetch('https://hookb.in/r1oRqyGrg7SzWWJVyqkO', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            username: "bill",
+            password: "pass123"
+        })
+    }).then(response => response.json())
+        .then(console.log).catch(console.log)
 
 
 </script>
