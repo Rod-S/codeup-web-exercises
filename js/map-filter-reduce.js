@@ -51,6 +51,9 @@ console.log(users3Lang);
 let userEmail = users.map(user => user.email);
 console.log(userEmail);
 
+// let userEmail = users.map(user => user.email);
+// console.log(userEmail);
+
 let totalExp = users.reduce((currentValue, user) => currentValue += user.yearsOfExperience, 0);
 let totalExpAvg = totalExp / users.length;
 console.log(totalExp);
@@ -65,27 +68,29 @@ console.log(usernameConcatString);
 
 let uniqueLanguageList = users.reduce((totalUniqueLanguages, user) => {
     user.languages.forEach(language =>
-        totalUniqueLanguages.includes(language) ? totalUniqueLanguages : totalUniqueLanguages = [...totalUniqueLanguages, language]
+        totalUniqueLanguages.includes(language) ? totalUniqueLanguages : totalUniqueLanguages.push(language)
     )
     return totalUniqueLanguages
 }, []);
 console.log(uniqueLanguageList);
 
+// add all languages together into one array using reduce
+// convert to set
+// convert set back to array
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// const allLanguages = users.reduce((accum, curr) => {
+//     return accum.concat(curr.languages);
+// }, []);
+//
+// const uniqueLanguages = new Set(allLanguages);
+//
+// console.log(uniqueLanguages);
+//
+// const arrUnique = Array.from(uniqueLanguages);
+//
+// console.log(arrUnique);
+//
+//
 
 
 
