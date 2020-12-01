@@ -23,9 +23,8 @@ const getLastCommit = (username) =>
         .then(res => res.json())
         .then((res) => {
             for (const event of res) {
-                if (event.type == "PushEvent") {
+                if (event.type === "PushEvent") {
                     return event
-                    break;
                 }
             }
         }).then((res) => {
